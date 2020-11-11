@@ -1,4 +1,5 @@
 package Presentacion;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -7,9 +8,10 @@ public class VentanaPrincipal {
 
 	private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
+	public JFrame getFrame() {
+		return frame;
+	}
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -35,7 +37,7 @@ public class VentanaPrincipal {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 705, 436);
+		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
