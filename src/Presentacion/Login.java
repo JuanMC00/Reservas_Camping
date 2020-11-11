@@ -66,7 +66,7 @@ public class Login {
 		login.getContentPane().add(lblUsuario);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(146, 85, 197, 22);
+		txtUsuario.setBounds(146, 85, 203, 22);
 		login.getContentPane().add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
@@ -76,7 +76,7 @@ public class Login {
 		login.getContentPane().add(lblContrasena);
 		
 		txtContrasena = new JTextField();
-		txtContrasena.setBounds(146, 128, 197, 22);
+		txtContrasena.setBounds(146, 128, 203, 22);
 		login.getContentPane().add(txtContrasena);
 		txtContrasena.setColumns(10);
 		
@@ -91,14 +91,14 @@ public class Login {
 		login.getContentPane().add(btnEnglish);
 		
 		lblError = new JLabel("Usuario o constraseña incorrectos.");
-		lblError.setEnabled(false);
+		lblError.setVisible(false);
 		lblError.setForeground(Color.RED);
-		lblError.setBounds(156, 166, 199, 16);
+		lblError.setBounds(146, 163, 203, 16);
 		login.getContentPane().add(lblError);
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new BtnEntrarActionListener());
-		btnEntrar.setBounds(367, 162, 97, 25);
+		btnEntrar.setBounds(367, 159, 97, 25);
 		login.getContentPane().add(btnEntrar);
 		
 		JTextArea txtrBienvenida = new JTextArea();
