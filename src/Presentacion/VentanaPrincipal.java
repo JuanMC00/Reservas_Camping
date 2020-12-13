@@ -63,7 +63,7 @@ public class VentanaPrincipal {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 1450, 986);
+		frame.setBounds(100, 100, 1450, 980);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		lblBarraEstado = new JLabel("Barra de estado");
@@ -78,7 +78,7 @@ public class VentanaPrincipal {
 		tree = new JTree();
 		tree.addTreeSelectionListener(new TreeTreeSelectionListener());
 		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("JTree") {
+			new DefaultMutableTreeNode("Inicio") {
 				{
 					DefaultMutableTreeNode node_1;
 					node_1 = new DefaultMutableTreeNode("Reserva");
@@ -100,8 +100,8 @@ public class VentanaPrincipal {
 		JPanel pnlInicio = new JPanel();
 		panelCard.add(pnlInicio, "Inicio");
 		
-		JLabel lblEstoEsEl = new JLabel("Esto es el incio");
-		pnlInicio.add(lblEstoEsEl);
+		JLabel lblTitle = new JLabel("Esto es el incio");
+		pnlInicio.add(lblTitle);
 		
 		JPanel pnlReservaBungalow = new ReservaBungalow();
 		panelCard.add(pnlReservaBungalow, "Bungalow");
