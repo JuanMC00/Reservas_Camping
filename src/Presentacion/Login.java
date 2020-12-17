@@ -18,14 +18,15 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.*;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Login {
 
 	private JFrame login;
 	private JTextField txtUsuario;
-	private JTextField txtContrasena;
 	private JLabel lblError;
 	VentanaPrincipal home = new VentanaPrincipal();
+	private JPasswordField txtContrasena;
 
 	/**
 	 * Launch the application.
@@ -66,7 +67,7 @@ public class Login {
 		login.getContentPane().add(lblUsuario);
 		
 		txtUsuario = new JTextField();
-		txtUsuario.setBounds(146, 85, 203, 22);
+		txtUsuario.setBounds(146, 85, 203, 25);
 		login.getContentPane().add(txtUsuario);
 		txtUsuario.setColumns(10);
 		
@@ -74,11 +75,6 @@ public class Login {
 		lblContrasena.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		lblContrasena.setBounds(26, 128, 108, 16);
 		login.getContentPane().add(lblContrasena);
-		
-		txtContrasena = new JTextField();
-		txtContrasena.setBounds(146, 128, 203, 22);
-		login.getContentPane().add(txtContrasena);
-		txtContrasena.setColumns(10);
 		
 		JButton btnEspanol = new JButton("");
 		btnEspanol.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/España.png")));
@@ -114,6 +110,10 @@ public class Login {
 		lblInfoLogin.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Icono_Info.png")));
 		lblInfoLogin.setBounds(32, 15, 30, 30);
 		login.getContentPane().add(lblInfoLogin);
+		
+		txtContrasena = new JPasswordField();
+		txtContrasena.setBounds(146, 125, 203, 26);
+		login.getContentPane().add(txtContrasena);
 
 	}
 

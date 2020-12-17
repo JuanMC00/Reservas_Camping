@@ -24,6 +24,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.JScrollPane;
+import java.awt.Dimension;
 
 public class VentanaPrincipal {
 
@@ -73,6 +74,7 @@ public class VentanaPrincipal {
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
 		
 		scrollPane = new JScrollPane();
+		scrollPane.setMinimumSize(new Dimension(150, 32));
 		splitPane.setLeftComponent(scrollPane);
 		
 		tree = new JTree();
