@@ -77,12 +77,12 @@ public class Login {
 		login.getContentPane().add(lblContrasena);
 		
 		JButton btnEspanol = new JButton("");
-		btnEspanol.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/España.png")));
+		btnEspanol.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Fotos/España.png")));
 		btnEspanol.setBounds(366, 13, 50, 50);
 		login.getContentPane().add(btnEspanol);
 		
 		JButton btnEnglish = new JButton("");
-		btnEnglish.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Reino_Unido.png")));
+		btnEnglish.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Fotos/Reino_Unido.png")));
 		btnEnglish.setBounds(441, 13, 50, 50);
 		login.getContentPane().add(btnEnglish);
 		
@@ -107,7 +107,7 @@ public class Login {
 		login.getContentPane().add(txtrBienvenida);
 		
 		JLabel lblInfoLogin = new JLabel("");
-		lblInfoLogin.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Icono_Info.png")));
+		lblInfoLogin.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Fotos/Icono_Info.png")));
 		lblInfoLogin.setBounds(32, 15, 30, 30);
 		login.getContentPane().add(lblInfoLogin);
 		

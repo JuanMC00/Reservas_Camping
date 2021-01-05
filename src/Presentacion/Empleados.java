@@ -7,6 +7,9 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 import javax.swing.DefaultCellEditor;
 import javax.swing.ImageIcon;
@@ -18,6 +21,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 
 import Presentacion.ModeloTablaEmpleados;
+import Presentacion.ColumnaFotoEditor;
 
 import javax.swing.SwingConstants;
 import javax.swing.JScrollPane;
@@ -48,19 +52,12 @@ public class Empleados extends JPanel {
 		add(scrollPane, BorderLayout.CENTER);
 		
 		tbEmpleados = new JTable();
-		tbEmpleados.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"wefwefew", "ghjkl\u00F1"},
-			},
-			new String[] {
-				"Que tal", "egwgwe"
-			}
-		));
+
 		scrollPane.setViewportView(tbEmpleados);
 		
 		ModeloTablaEmpleados modeloTabla = new ModeloTablaEmpleados();
 		tbEmpleados.setModel(modeloTabla);
-		tbEmpleados.setRowHeight(30);
+		tbEmpleados.setRowHeight(150);
 		
 		
 		TableColumn columnaDisponibilidad = tbEmpleados.getColumnModel().getColumn(7);
@@ -70,27 +67,32 @@ public class Empleados extends JPanel {
 		cboDisponibilidad.addItem("Noche");
 		columnaDisponibilidad.setCellEditor(new DefaultCellEditor(cboDisponibilidad));
 		
-		Object[] fila1 = {"Raul", "Serrano", "(falta por programar)", "676432347", "raulillo@gmail.com", "Spanish, English", "Socorrista", "Mañanas"};
+		
+		Object[] fila1 = {"Raul", "Serrano", new ImageIcon(getClass().getClassLoader().getResource("Presentacion/Fotos/Empleado1.jpg")), "676432347", "raulillo@gmail.com", "Spanish, English", "Socorrista", "Mañana"};
 		modeloTabla.addFila(fila1);
 		
-		Object[] fila2 = {"Adrian", "Martin", "(falta por programar)", "671395321", "adrianpillin@alu.ulcm.es", "Spanish, Portuguese", "Monitor de Aquagym", "Noche"};
+		Object[] fila2 = {"Adrian", "Martin", new ImageIcon(getClass().getClassLoader().getResource("Presentacion/Fotos/Empleado2.jpg")), "671395321", "adrianpillin@alu.ulcm.es", "Spanish, Portuguese", "Monitor de Aquagym", "Noche"};
 		modeloTabla.addFila(fila2);
 		
-		Object[] fila3 = {"Carlos", "Moreno Maroto", "(falta por programar)", "671192521", "carlosmarotazo@hotmail.com", "Spanish, Italian", "Monitor Tiro con arco", "Tarde"};
+		Object[] fila3 = {"Carlos", "Moreno Maroto", new ImageIcon(getClass().getClassLoader().getResource("Presentacion/Fotos/Empleado3.jpg")), "671192521", "carlosmarotazo@hotmail.com", "Spanish, Italian", "Monitor Tiro con arco", "Tarde"};
 		modeloTabla.addFila(fila3);
 		
-		Object[] fila4 = {"Bruno", "Berguerón Sánchez", "(falta por programar)", "698542521", "bbergueron@yahoo.com", "Spanish, Catalan", "Monitor Submarinismo", "Tarde"};
+		Object[] fila4 = {"Bruno", "Berguerón Sánchez", new ImageIcon(getClass().getClassLoader().getResource("Presentacion/Fotos/Empleado4.jpg")), "698542521", "bbergueron@yahoo.com", "Spanish, Catalan", "Monitor Submarinismo", "Tarde"};
 		modeloTabla.addFila(fila4);
 		
-		Object[] fila5 = {"Sergio", "Morros Martinez", "(falta por programar)", "619046732", "serchelmorros@alu.uclm.com", "Spanish", "Monitor Fiestas", "Noche"};
+		Object[] fila5 = {"Sergio", "Morros Martinez", new ImageIcon(getClass().getClassLoader().getResource("Presentacion/Fotos/Empleado5.jpg")), "619046732", "serchelmorros@alu.uclm.com", "Spanish", "Monitor Fiestas", "Noche"};
 		modeloTabla.addFila(fila5);
-	
+
+		
+		TableColumn columnaFoto = tbEmpleados.getColumnModel().getColumn(2);
+		columnaFoto.setCellEditor(new ColumnaFotoEditor());
+		
 	}
 
 	private class BtnAltaActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			ModeloTablaEmpleados modeloTabla = (ModeloTablaEmpleados) tbEmpleados.getModel();
-			Object[] nuevaFila = {"...", "...", "Adjunte la foto (falta por programar)", "...", "...", "...", "...", "..."};
+			Object[] nuevaFila = {"...", "...",  new ImageIcon(getClass().getClassLoader().getResource("Presentacion/Fotos/Empleado0.jfif")), "...", "...", "...", "...", "..."};
 			modeloTabla.addFila(nuevaFila);
 			modeloTabla.fireTableDataChanged();
 		}
