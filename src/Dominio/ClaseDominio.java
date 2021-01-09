@@ -1,10 +1,11 @@
 package Dominio;
 
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.StringTokenizer;
 
-public class ClaseDominio {
+public class ClaseDominio implements Datos{
 	
 	public double calcularPrecioNocheParcela(String FechaLlegada, int tipo) {
 		double precio=0.0;
@@ -87,6 +88,16 @@ public class ClaseDominio {
 
 		return resultado;
 	}
-
-
+	
+	public String datosRuta(int numRuta) {
+		String datos="";
+		
+		switch(numRuta) {
+			case 1:{datos=Datos.DatosRutaLlanura; break;}
+			case 2:{datos=Datos.DatosRutaMontaña; break;}
+			case 3:{datos=Datos.DatosRutaEmbalse; break;}
+		}
+		return datos;
+	}
+	
 }

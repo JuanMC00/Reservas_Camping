@@ -72,7 +72,7 @@ public class ReservaBungalow extends JPanel {
 	private JButton btnBuscar;
 	private JButton btnAceptar;
 	
-	ReservaGuardada VentanaOK = new ReservaGuardada();
+	ReservaGuardada VentanaOK = new ReservaGuardada("Tu reserva se ha guardado con éxito");
 	
 	public ReservaBungalow() {
 		setBounds(new Rectangle(0, 0, 1450, 980));
@@ -520,7 +520,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_btnGuardar.gridy = 24;
 		add(btnGuardar, gbc_btnGuardar);
 		
-		lblErrorCamposObligatorios = new JLabel("Error. Algunos obligatorios no han sido rellenados.");
+		lblErrorCamposObligatorios = new JLabel("Error. Algunos obligatorios(*) no han sido rellenados.");
 		lblErrorCamposObligatorios.setVisible(false);
 		lblErrorCamposObligatorios.setForeground(Color.RED);
 		lblErrorCamposObligatorios.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -538,7 +538,6 @@ public class ReservaBungalow extends JPanel {
 		if(txtNombre.getText() == ""					||
 				txtApellidos.getText() == ""			||
 				txtTelefono.getText() == ""				||
-				cboNumOcupantes.getSelectedIndex() == 0	||
 				txtHoraLlegada.getText() == "" 			||
 				txtHoraSalida.getText() == ""			||
 				cboCapacidadMax.getSelectedIndex() == 0	||
@@ -549,7 +548,7 @@ public class ReservaBungalow extends JPanel {
 		return flag;
 	}
 	
-	private void limpiar() {
+	private void limpiarCampos() {
 		txtNombre.setText("");
 		txtApellidos.setText("");
 		txtTelefono.setText("");
@@ -565,7 +564,7 @@ public class ReservaBungalow extends JPanel {
 		lblPrecioNocheConsultado.setText("");
 		lblPrecioTotalConsultado.setText("");
 		cboEquipamiento.setSelectedIndex(0);
-		lblDescripcion.setText("");
+		lblDescripcionTexto.setText("");
 		lblEquipamientoExtra.setEnabled(false);
 		lblEquipamientoExtra.setVisible(false);
 		txtEquipamientoExtra.setText("");
@@ -578,7 +577,7 @@ public class ReservaBungalow extends JPanel {
 
 	private class BtnLimpiarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			limpiar();
+			limpiarCampos();
 			btnGuardar.setEnabled(false);
 		}
 
@@ -630,7 +629,7 @@ public class ReservaBungalow extends JPanel {
 	
 	private class BtnGuardarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			limpiar();
+			limpiarCampos();
 			VentanaOK.getFrame().setVisible(true);
 			btnGuardar.setEnabled(false);
 		}			

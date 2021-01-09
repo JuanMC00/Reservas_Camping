@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 public class ReservaGuardada {
 
 	private JFrame frame;
-	private JLabel lblTuReservaSe;
+	private JLabel lblMensaje;
 	private JButton btnOk;
 
 	public JFrame getFrame() {
@@ -25,7 +25,7 @@ public class ReservaGuardada {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReservaGuardada window = new ReservaGuardada();
+					ReservaGuardada window = new ReservaGuardada("");
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,25 +37,24 @@ public class ReservaGuardada {
 	/**
 	 * Create the application.
 	 */
-	public ReservaGuardada() {
-		initialize();
+	public ReservaGuardada(String mensaje) {
+		initialize(mensaje);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(String mensaje) {
 		frame = new JFrame();
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		lblTuReservaSe = new JLabel("Tu reserva se ha guardado con éxito");
-		lblTuReservaSe.setHorizontalAlignment(SwingConstants.CENTER);
-		lblTuReservaSe.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblTuReservaSe.setBounds(15, 64, 414, 32);
-		frame.getContentPane().add(lblTuReservaSe);
+		lblMensaje = new JLabel(mensaje);
+		lblMensaje.setHorizontalAlignment(SwingConstants.CENTER);
+		lblMensaje.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblMensaje.setBounds(15, 64, 414, 32);
+		frame.getContentPane().add(lblMensaje);
 		
 		btnOk = new JButton("OK");
 		btnOk.addActionListener(new BtnOkActionListener());
