@@ -1,20 +1,20 @@
-1A;Pequeña;WC;Cesped
-1B;Pequeña;WC;Cesped
-1C;Mediana;Entrada;Luz
-1D;Deluxe;Entrada;Luz y Gas
-2A;Pequeña;WC;Cesped
-2B;Pequeña;WC;Cesped
-2C;Mediana;Entrada;Luz
-2D;Deluxe;Entrada;Luz y Gas
-3A;Pequeña;WC y Restaurante;Nada
-3B;Pequeña;Restaurante;Nada
-3C;Mediana;Playa;Luz
-3D;Deluxe;Playa;Luz y Gas
-4A;Autocaravana;Restaurante;Luz y Agua
-4B;Autocaravana;Restaurante;Luz y Agua
-4C;Mediana;PLaya;Luz
-4D;Deluxe;Playa;Luz y Gas
-5A;Autocaravana;Piscina y Restaurante;Luz y Agua
-5B;Autocaravana;Piscina;Luz y Agua
-5C;Mediana;Piscina y playa;Luz
-5D;Deluxe;Piscina y playa;Luz y Gas
+1A;Pequeña;Servicios;Césped;WC;Grass
+1B;Pequeña;Servicios;Césped;WC;Grass
+1C;Mediana;Entrada;Luz;Entrance;Light
+1D;Deluxe;Entrada;Luz y Gas;Entrance;Light & Gas
+2A;Pequeña;Servicios;Césped;WC;Grass
+2B;Pequeña;Servicios;Césped;WC;Grass
+2C;Mediana;Entrada;Luz;Entrance:Light
+2D;Deluxe;Entrada;Luz y Gas;Entrance;Ligth & Gas
+3A;Pequeña;Servicios y Restaurante;Césped;WC & Restaurant;Grass
+3B;Pequeña;Restaurante;Césped;Restaurant;Grass
+3C;Mediana;Playa;Luz;Beach;Light
+3D;Deluxe;Playa;Luz y Gas;Beach;Ligth & Gas
+4A;Autocaravana;Restaurante;Luz y Agua;Restaurant;Light & Water
+4B;Autocaravana;Restaurante;Luz y Agua;Restaurante;Light & Water
+4C;Mediana;PLaya;Luz;Beach;Light
+4D;Deluxe;Playa;Luz y Gas;Beach;Light & Gas
+5A;Autocaravana;Piscina y Restaurante;Luz y Agua;Swimming Pool & Restaurant;Light & Water
+5B;Autocaravana;Piscina;Luz y Agua;Swimming Pool;Light & Water
+5C;Mediana;Piscina y playa;Luz;Swimming Pool & Beach;Light
+5D;Deluxe;Piscina y playa;Luz y Gas;Swimming Pool & Beach;Light & Gas

@@ -475,7 +475,7 @@ public class ReservaBungalow extends JPanel {
 		if(Internacionalizacion.getIdioma().equals("espanol"))
 			cboEquipamiento.setModel(new DefaultComboBoxModel(new String[] {"Básico", "Menaje", "Microondas", "Ropa de cama", "Toallas", "WiFi", "Otros"}));
 		else
-			cboEquipamiento.setModel(new DefaultComboBoxModel(new String[] {"Basic", "Household", "Microwave", "Bed sheets", "towels", "WiFi", "Other"}));
+			cboEquipamiento.setModel(new DefaultComboBoxModel(new String[] {"Basic", "Household", "Microwave", "Bed sheets", "Towels", "WiFi", "Other"}));
 		
 		GridBagConstraints gbc_cboEquipamiento = new GridBagConstraints();
 		gbc_cboEquipamiento.gridwidth = 3;
@@ -522,7 +522,7 @@ public class ReservaBungalow extends JPanel {
 		btnReservar = new JButton(Internacionalizacion.getString("ReservaBungalow.btnGuardar.text")); //$NON-NLS-1$
 		btnReservar.setEnabled(false);
 		btnReservar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReservar.addActionListener(new BtnGuardarActionListener());
+		btnReservar.addActionListener(new BtnReservarActionListener());
 		
 		btnLimpiar = new JButton(Internacionalizacion.getString("ReservaBungalow.btnLimpiar.text")); //$NON-NLS-1$
 		btnLimpiar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -584,19 +584,20 @@ public class ReservaBungalow extends JPanel {
 	
 	private boolean checkCampos() {
 		boolean flag=false;
-		if(txtNombre.getText() == ""					||
-				txtApellidos.getText() == ""			||
-				txtTelefono.getText() == ""				||
-				txtHoraLlegada.getText() == "" 			||
-				txtHoraSalida.getText() == ""			||
-				txtFechaLlegada.getText() == ""			||
-				txtFechaSalida.getText() == "")
+		if(txtNombre.getText().equals("")				||
+				txtApellidos.getText().equals("")		||
+				txtTelefono.getText().equals("")		||
+				txtHoraLlegada.getText().equals("") 	||
+				txtHoraSalida.getText().equals("")		||
+				txtFechaLlegada.getText().equals("")	||
+				txtFechaSalida.getText().equals(""))
 			flag=true;
 		
 		return flag;
 	}
 	
 	private void limpiarCampos() {
+		desbloquear();
 		txtNombre.setText("");
 		txtApellidos.setText("");
 		txtTelefono.setText("");
@@ -622,9 +623,42 @@ public class ReservaBungalow extends JPanel {
 		lblErrorFecha2.setVisible(false);
 		lblErrorCamposObligatorios.setVisible(false);
 		btnReservar.setEnabled(false);
-		
 	}	
 
+	private void bloquear() {
+		txtNombre.setEnabled(false);
+		txtApellidos.setEnabled(false);
+		txtTelefono.setEnabled(false);
+		txtEmail.setEnabled(false);;
+		cboNumOcupantes.setEnabled(false);
+		txtHoraLlegada.setEnabled(false);
+		txtHoraSalida.setEnabled(false);
+		txtaSolicitudesEspeciales.setEnabled(false);
+		cboTamano.setEnabled(false);
+		cboCapacidadMax.setEnabled(false);
+		txtFechaLlegada.setEnabled(false);
+		txtFechaSalida.setEnabled(false);
+		cboEquipamiento.setEnabled(false);
+		txtEquipamientoExtra.setEnabled(false);
+	}
+	
+	private void desbloquear() {
+		txtNombre.setEnabled(true);
+		txtApellidos.setEnabled(true);
+		txtTelefono.setEnabled(true);
+		txtEmail.setEnabled(true);;
+		cboNumOcupantes.setEnabled(true);
+		txtHoraLlegada.setEnabled(true);
+		txtHoraSalida.setEnabled(true);
+		txtaSolicitudesEspeciales.setEnabled(true);
+		cboTamano.setEnabled(true);
+		cboCapacidadMax.setEnabled(true);
+		txtFechaLlegada.setEnabled(true);
+		txtFechaSalida.setEnabled(true);
+		cboEquipamiento.setEnabled(true);
+		txtEquipamientoExtra.setEnabled(true);
+	}
+	
 	private class BtnLimpiarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			limpiarCampos();
@@ -641,24 +675,32 @@ public class ReservaBungalow extends JPanel {
 			switch(cboTamano.getSelectedIndex()) {
 				case 1: {//Pequeño
 					lblDescripcionTexto.setText("Cabaña de madera comoda y acogedora");
+					if(Internacionalizacion.getIdioma().equals("ingles"))
+						lblDescripcionTexto.setText("Comfortable and safe log hut");
 					lblFotoBungalow.setIcon(new ImageIcon(ReservaBungalow.class.getResource("/Presentacion/Fotos/Bungalow1.jpg")));
 					break;
 				}
 				
 				case 2: {//Mediano
 					lblDescripcionTexto.setText("Ni muy grande ni muy pequeño. Perfecto.");
+					if(Internacionalizacion.getIdioma().equals("ingles"))
+						lblDescripcionTexto.setText("Neither too nor too small. Just Perfect.");
 					lblFotoBungalow.setIcon(new ImageIcon(ReservaBungalow.class.getResource("/Presentacion/Fotos/Bungalow2.jpg")));
 					break;
 				}
 				
 				case 3: {//Grande
 					lblDescripcionTexto.setText("La aventura en familia empiza aquí.");
+					if(Internacionalizacion.getIdioma().equals("ingles"))
+						lblDescripcionTexto.setText("Your family adventure starts here");
 					lblFotoBungalow.setIcon(new ImageIcon(ReservaBungalow.class.getResource("/Presentacion/Fotos/Bungalow3.jpg")));
 					break;
 				}
 				
 				case 4: {//Deluxe
 					lblDescripcionTexto.setText("La mejor cabaña para los amigos.");
+					if(Internacionalizacion.getIdioma().equals("ingles"))
+						lblDescripcionTexto.setText("The best hut for friends.");
 					lblFotoBungalow.setIcon(new ImageIcon(ReservaBungalow.class.getResource("/Presentacion/Fotos/Bungalow5.jpg")));
 					break;
 				}
@@ -677,7 +719,7 @@ public class ReservaBungalow extends JPanel {
 		}
 	}
 	
-	private class BtnGuardarActionListener implements ActionListener {
+	private class BtnReservarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			limpiarCampos();
 			VentanaOK.getFrame().setVisible(true);
@@ -699,40 +741,50 @@ public class ReservaBungalow extends JPanel {
 				lblErrorCamposObligatorios.setVisible(true);
 				
 			else {
+				lblErrorCamposObligatorios.setVisible(false);
+				
 				double precio=0.0;
 				ClaseDominio calcular = new ClaseDominio();
+				boolean posible=true;
 				
-				try {		
-					
-					lblErrorCamposObligatorios.setVisible(false);
+				try {							
 					btnReservar.setEnabled(true);
 					precio=calcular.calcularPrecioNocheBungalow(txtFechaLlegada.getText(), cboTamano.getSelectedIndex()); //El precio se calcula con la temporada del dia de llegada
 					lblPrecioNocheConsultado.setText(String.valueOf(precio)+ " €");
 					lblErrorFecha1.setVisible(false);
 					
-				}catch(NoSuchElementException NSEE1) {
-					lblErrorFecha1.setVisible(true);					
-				}
-				
-				catch(NumberFormatException NFE1) {
-					lblErrorFecha1.setVisible(true);				
-				}
-				
-				try {
-					double precioTotal=precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText());
-					if(precioTotal==0.0)
-						lblPrecioTotalConsultado.setText(precio + " €");
-					else
-						lblPrecioTotalConsultado.setText(String.valueOf(precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText()) + " €"));
-					lblErrorFecha2.setVisible(false);
+					try {
+						double precioTotal=precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText());
+						if(precioTotal==0.0)
+							lblPrecioTotalConsultado.setText(precio + " €");
+						else
+							lblPrecioTotalConsultado.setText(String.valueOf(precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText()) + " €"));
+						lblErrorFecha2.setVisible(false);
+						
+					}catch(NoSuchElementException NSEE2) {
+						lblErrorFecha2.setVisible(true);
+						posible=false;
+					}
 					
-				}catch(NoSuchElementException NSEE2) {
-					lblErrorFecha2.setVisible(true);					
+					catch(NumberFormatException NFE1) {
+						lblErrorFecha2.setVisible(true);
+						posible=false;
+					}
+					
+				}catch(NoSuchElementException NSEE1) {
+					lblErrorFecha1.setVisible(true);
+					lblErrorFecha2.setVisible(false);
+					posible=false;
 				}
 				
 				catch(NumberFormatException NFE1) {
-					lblErrorFecha2.setVisible(true);				
+					lblErrorFecha1.setVisible(true);
+					lblErrorFecha2.setVisible(false);
+					posible=false;
 				}
+				
+				if(posible)
+					bloquear();
 			}
 		}
 	}

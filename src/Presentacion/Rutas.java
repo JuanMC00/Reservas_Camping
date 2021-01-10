@@ -398,9 +398,18 @@ public class Rutas extends JPanel {
 				txtMonitor.setText(st.nextToken());
 				cboSenderistasMin.setSelectedIndex(Integer.valueOf(st.nextToken()) - 1);
 				cboSenderistasMax.setSelectedIndex(Integer.valueOf(st.nextToken()) - 1);
-				cboGradoDificultad.setSelectedIndex(Integer.valueOf(st.nextToken()) - 1);
+				cboGradoDificultad.setSelectedIndex(Integer.valueOf(st.nextToken()) - 1);					
 				txtDescripcion.setText(st.nextToken());
 				txtEquipamiento.setText(st.nextToken());
+				
+				if(Internacionalizacion.getIdioma().equals("ingles")) {
+					txtDescripcion.setText(st.nextToken());
+					txtEquipamiento.setText(st.nextToken());					
+				}
+				else {
+					st.nextToken();
+					st.nextToken();
+				}
 				btnFotoMapaRuta.setIcon(new ImageIcon(ReservaBungalow.class.getResource(st.nextToken())));
 			}
 			

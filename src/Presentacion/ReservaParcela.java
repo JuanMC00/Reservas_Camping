@@ -504,7 +504,7 @@ public class ReservaParcela extends JPanel {
 		btnReservar = new JButton(Internacionalizacion.getString("ReservaParcela.btnGuardar.text")); //$NON-NLS-1$
 		btnReservar.setEnabled(false);
 		btnReservar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnReservar.addActionListener(new BtnGuardarActionListener());
+		btnReservar.addActionListener(new BtnReservarActionListener());
 		GridBagConstraints gbc_btnReservar = new GridBagConstraints();
 		gbc_btnReservar.fill = GridBagConstraints.BOTH;
 		gbc_btnReservar.insets = new Insets(0, 0, 5, 5);
@@ -526,14 +526,14 @@ public class ReservaParcela extends JPanel {
 	
 	private boolean checkCampos() {
 		boolean flag=false;
-		if(txtNombre.getText() == ""					||
-				txtApellidos.getText() == ""			||
-				txtTelefono.getText() == ""				||
-				txtHoraLlegada.getText() == "" 			||
-				txtHoraSalida.getText() == ""			||
+		if(txtNombre.getText().equals("")				||
+				txtApellidos.getText().equals("")		||
+				txtTelefono.getText().equals("")		||
+				txtHoraLlegada.getText().equals("")		||
+				txtHoraSalida.getText().equals("")		||
 				cboTipo.getSelectedIndex() == 0			||
-				txtFechaLlegada.getText() == ""			||
-				txtFechaSalida.getText() == "")
+				txtFechaLlegada.getText().equals("")	||
+				txtFechaSalida.getText().equals(""))
 			flag=true;
 		
 		return flag;
@@ -541,6 +541,7 @@ public class ReservaParcela extends JPanel {
 	}
 	
 	private void limpiar() {
+		desbloquear();
 		txtNombre.setText("");
 		txtApellidos.setText("");
 		txtTelefono.setText("");
@@ -559,8 +560,36 @@ public class ReservaParcela extends JPanel {
 		lblErrorFecha1.setVisible(false);
 		lblErrorFecha2.setVisible(false);
 		lblErrorCamposObligatorios.setVisible(false);
-		btnReservar.setEnabled(false);
-		
+		btnReservar.setEnabled(false);		
+	}
+	
+	
+	private void bloquear() {
+		txtNombre.setEnabled(false);
+		txtApellidos.setEnabled(false);
+		txtTelefono.setEnabled(false);
+		txtEmail.setEnabled(false);
+		cboNumOcupantes.setEnabled(false);
+		txtHoraLlegada.setEnabled(false);
+		txtHoraSalida.setEnabled(false);
+		txtaSolicitudesEspeciales.setEnabled(false);
+		cboTipo.setEnabled(false);
+		txtFechaLlegada.setEnabled(false);
+		txtFechaSalida.setEnabled(false);	
+	}
+	
+	private void desbloquear() {
+		txtNombre.setEnabled(true);
+		txtApellidos.setEnabled(true);
+		txtTelefono.setEnabled(true);
+		txtEmail.setEnabled(true);
+		cboNumOcupantes.setEnabled(true);
+		txtHoraLlegada.setEnabled(true);
+		txtHoraSalida.setEnabled(true);
+		txtaSolicitudesEspeciales.setEnabled(true);
+		cboTipo.setEnabled(true);
+		txtFechaLlegada.setEnabled(true);
+		txtFechaSalida.setEnabled(true);	
 	}
 	
 	private class BtnLimpiarActionListener implements ActionListener {
@@ -619,7 +648,7 @@ public class ReservaParcela extends JPanel {
 	}
 	
 
-	private class BtnGuardarActionListener implements ActionListener {
+	private class BtnReservarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			limpiar();
 			VentanaOK.getFrame().setVisible(true);
@@ -634,54 +663,71 @@ public class ReservaParcela extends JPanel {
 				lblErrorCamposObligatorios.setVisible(true);
 				
 			else {
+				lblErrorCamposObligatorios.setVisible(false);
 				
 				//En cuanto a precio por noche y precio total de la parcela:
 				double precio=0.0;
 				ClaseDominio calcular = new ClaseDominio();
+				boolean posible=true;
 				
 				try {		
-					
-					lblErrorCamposObligatorios.setVisible(false);
+
 					btnReservar.setEnabled(true);
 					precio=calcular.calcularPrecioNocheParcela(txtFechaLlegada.getText(), cboTipo.getSelectedIndex()); //El precio se calcula con la temporada del dia de llegada
 					lblPrecioNocheConsultado.setText(String.valueOf(precio)+ " €");
 					lblErrorFecha1.setVisible(false);
+				
+					
+					try {
+						double precioTotal=precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText());
+						
+						if(precioTotal==0.0)
+							lblPrecioTotalConsultado.setText(precio + " €");
+						else
+							lblPrecioTotalConsultado.setText(String.valueOf(precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText()) + " €"));
+						
+						lblErrorFecha2.setVisible(false);
+						
+					}catch(NoSuchElementException NSEE2) {
+						lblErrorFecha2.setVisible(true);
+						posible=false;
+					}
+					
+					catch(NumberFormatException NFE2) {
+						lblErrorFecha2.setVisible(true);
+						posible=false;
+					}
 					
 				}catch(NoSuchElementException NSEE1) {
-					lblErrorFecha1.setVisible(true);					
-				}
-				
-				catch(NumberFormatException NFE1) {
-					lblErrorFecha1.setVisible(true);				
-				}
-				
-				try {
-					double precioTotal=precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText());
-					if(precioTotal==0.0)
-						lblPrecioTotalConsultado.setText(precio + " €");
-					else
-						lblPrecioTotalConsultado.setText(String.valueOf(precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText()) + " €"));
+					lblErrorFecha1.setVisible(true);
 					lblErrorFecha2.setVisible(false);
-					
-				}catch(NoSuchElementException NSEE2) {
-					lblErrorFecha2.setVisible(true);					
+					posible=false;
 				}
 				
 				catch(NumberFormatException NFE1) {
-					lblErrorFecha2.setVisible(true);				
+					lblErrorFecha1.setVisible(true);
+					lblErrorFecha2.setVisible(false);
+					posible=false;
 				}
+
+
 				
 				
 				//En cuanto a cercanias particularidades de la parcela
 				ClaseDominio obtenerInfo = new ClaseDominio();
 				
 				try {
-					lblCercaniasConsultadas.setText(obtenerInfo.infoCercaniasParcela(String.valueOf(cboUbicacion.getSelectedItem())));
-					lblParticularidadesConsultadas.setText(obtenerInfo.infoParticularidadesParcela(String.valueOf(cboUbicacion.getSelectedItem())));
+					lblCercaniasConsultadas.setText(obtenerInfo.infoCercaniasParcela(String.valueOf(cboUbicacion.getSelectedItem()), Internacionalizacion.getIdioma()));
+					lblParticularidadesConsultadas.setText(obtenerInfo.infoParticularidadesParcela(String.valueOf(cboUbicacion.getSelectedItem()), Internacionalizacion.getIdioma()));
 				
 				} catch (FileNotFoundException FNFE) {
-					System.out.println("Fichero Parcelas.txt no encontrado");
+					lblErrorCamposObligatorios.setVisible(true);
+					lblErrorCamposObligatorios.setText("Parcelas.txt file not found");
+					posible=false;
 				}
+				
+				if(posible)
+					bloquear();
 				
 			}
 			

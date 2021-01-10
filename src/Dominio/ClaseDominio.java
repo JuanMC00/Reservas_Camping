@@ -104,15 +104,15 @@ public class ClaseDominio implements Datos{
 		return datos;
 	}
 
-	public String infoCercaniasParcela(String parcela) throws FileNotFoundException {
-		return infoParcela(parcela)[0];
+	public String infoCercaniasParcela(String parcela, String idioma) throws FileNotFoundException {
+		return infoParcela(parcela, idioma)[0];
 	}
 
-	public String infoParticularidadesParcela(String parcela) throws FileNotFoundException {
-		return infoParcela(parcela)[1];
+	public String infoParticularidadesParcela(String parcela, String idioma) throws FileNotFoundException {
+		return infoParcela(parcela, idioma)[1];
 	}
 	
-	public String[] infoParcela(String parcela) throws FileNotFoundException {
+	public String[] infoParcela(String parcela, String idioma) throws FileNotFoundException {
 		String[] info = new String[2];
 		File parcelas = new File("Parcelas.txt");
 		Scanner sc = new Scanner(parcelas);
@@ -125,8 +125,15 @@ public class ClaseDominio implements Datos{
 			while(st.hasMoreTokens()) {
 				if(st.nextToken().equals(parcela)) {
 					st.nextToken();//Saltamos el tipo
-					info[0]=st.nextToken();
-					info[1]=st.nextToken();
+					if(idioma.equals("espanol")) {
+						info[0]=st.nextToken();
+						info[1]=st.nextToken();
+					}
+					else {
+						st.nextToken();st.nextToken();//Saltamos las cercanias y particularidades en español
+						info[0]=st.nextToken();
+						info[1]=st.nextToken();
+					}
 					token=false;
 				}
 			}
