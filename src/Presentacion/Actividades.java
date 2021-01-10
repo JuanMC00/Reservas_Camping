@@ -19,6 +19,8 @@ import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.awt.Color;
+import java.awt.Insets;
 
 public class Actividades extends JPanel {
 	private JPanel pnlBotones;

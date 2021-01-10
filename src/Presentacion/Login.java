@@ -20,6 +20,7 @@ import java.util.*;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 import javax.swing.SwingConstants;
+import java.awt.Toolkit;
 
 public class Login {
 
@@ -62,6 +63,7 @@ public class Login {
 	 */
 	private void initialize() {
 		login = new JFrame();
+		login.setIconImage(Toolkit.getDefaultToolkit().getImage(Login.class.getResource("/Presentacion/Fotos/LoginIcono.png")));
 		login.setResizable(false);
 		login.setBounds(100, 100, 520, 252);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -119,7 +121,7 @@ public class Login {
 		login.getContentPane().add(txtrBienvenida);
 		
 		lblInfoLogin = new JLabel(Internacionalizacion.getString("Login.lblInfoLogin.text")); //$NON-NLS-1$
-		lblInfoLogin.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Fotos/Icono_Info.png")));
+		lblInfoLogin.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Fotos/AyudaIcono.png")));
 		lblInfoLogin.setBounds(32, 15, 30, 30);
 		login.getContentPane().add(lblInfoLogin);
 		

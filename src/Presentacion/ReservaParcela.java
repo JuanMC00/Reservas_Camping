@@ -21,6 +21,8 @@ import java.util.Scanner;
 import java.awt.Color;
 
 import Dominio.ClaseDominio;
+import Dominio.Datos;
+
 import javax.swing.SwingConstants;
 
 public class ReservaParcela extends JPanel {
@@ -66,10 +68,11 @@ public class ReservaParcela extends JPanel {
 	private JLabel lblCercaniasConsultadas;
 	private JLabel lblErrorCamposObligatorios;
 	private JButton btnAceptar;
-	
-	ReservaGuardada VentanaOK;
 	private JLabel lblErrorFecha1;
 	private JLabel lblErrorFecha2;
+	private JButton btnAyuda;
+	
+	ReservaGuardada VentanaOK;
 	
 	public ReservaParcela() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -83,6 +86,23 @@ public class ReservaParcela extends JPanel {
 		if(Internacionalizacion.getIdioma().equals("ingles"))
 			mensaje="Your booking has successfully done";
 		VentanaOK = new ReservaGuardada(mensaje);
+		
+		btnAyuda = new JButton();
+		btnAyuda.addActionListener(new BtnAyudaActionListener());
+		btnAyuda.setIcon(new ImageIcon(ReservaParcela.class.getResource("/Presentacion/Fotos/AyudaIcono.png")));
+		//Para que no se vea con la textura de boton:
+		btnAyuda.setOpaque(false);
+		btnAyuda.setMargin(new Insets(0, 0, 0, 0));
+		btnAyuda.setFocusPainted(false);
+		btnAyuda.setContentAreaFilled(false);
+		btnAyuda.setBorderPainted(false);
+		btnAyuda.setBackground((Color) null);
+		GridBagConstraints gbc_btnAyuda = new GridBagConstraints();
+		gbc_btnAyuda.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_btnAyuda.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAyuda.gridx = 0;
+		gbc_btnAyuda.gridy = 0;
+		add(btnAyuda, gbc_btnAyuda);
 		
 		lblDatosCliente = new JLabel(Internacionalizacion.getString("ReservaParcela.lblDatosCliente.text")); //$NON-NLS-1$
 		lblDatosCliente.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -732,6 +752,20 @@ public class ReservaParcela extends JPanel {
 			}
 			
 		}
-	}		
+	}
+	
+	private class BtnAyudaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			Ayuda ayuda;
+			if(Internacionalizacion.getIdioma().equals("espanol")) {
+				ayuda = new Ayuda(Datos.AyudaReservaESP);
+				ayuda.getFrame().setVisible(true);
+			}
+			else
+				ayuda = new Ayuda(Datos.AyudaReservaENG);
+				ayuda.getFrame().setVisible(true);
+		}
+	}
+
 		
 }

@@ -42,11 +42,14 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class VentanaPrincipal {
 
 	private JFrame frame;
-	private JLabel lblBarraEstado;
 	private JSplitPane splitPane;
 	private JScrollPane scrollPane;
 	private JTree tree;
@@ -56,6 +59,17 @@ public class VentanaPrincipal {
 	private JLabel lblFoto;
 	private JLabel lblUltimoAcceso;
 	private JLabel lblUltimoAccesoTexto;
+	private JPanel panel;
+	private JLabel lblBarraEstado;
+	private JButton btnEspanol;
+	private JButton btnEnglish;
+	private JLabel lblAcercaDeLa;
+	private JLabel lblAutores;
+	private JLabel lblAutoresTexto;
+	private JLabel lblFecha;
+	private JLabel lblVersion;
+	private JLabel lblFechaTexto;
+	private JLabel lblVersionTexto;
 
 	public JFrame getFrame() {
 		return frame;
@@ -86,14 +100,46 @@ public class VentanaPrincipal {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(VentanaPrincipal.class.getResource("/Presentacion/Fotos/tent2.png")));
 		frame.setBounds(100, 100, 1450, 980);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.SOUTH);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{600, 536, 145, 145, 0};
+		gbl_panel.rowHeights = new int[]{30, 0};
+		gbl_panel.columnWeights = new double[]{0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
+		
 		lblBarraEstado = new JLabel(); //$NON-NLS-1$
+		GridBagConstraints gbc_lblBarraEstado = new GridBagConstraints();
+		gbc_lblBarraEstado.anchor = GridBagConstraints.WEST;
+		gbc_lblBarraEstado.insets = new Insets(0, 0, 0, 5);
+		gbc_lblBarraEstado.gridx = 0;
+		gbc_lblBarraEstado.gridy = 0;
+		panel.add(lblBarraEstado, gbc_lblBarraEstado);
+		
+		btnEspanol = new JButton(Internacionalizacion.getString("VentanaPrincipal.btnEspanol.text")); //$NON-NLS-1$
+		btnEspanol.addActionListener(new BtnEspanolActionListener());
+		GridBagConstraints gbc_btnEspanol = new GridBagConstraints();
+		gbc_btnEspanol.fill = GridBagConstraints.BOTH;
+		gbc_btnEspanol.insets = new Insets(0, 0, 0, 5);
+		gbc_btnEspanol.gridx = 2;
+		gbc_btnEspanol.gridy = 0;
+		panel.add(btnEspanol, gbc_btnEspanol);
+		
+		btnEnglish = new JButton(Internacionalizacion.getString("VentanaPrincipal.btnEnglish.text")); //$NON-NLS-1$
+		btnEnglish.addActionListener(new BtnEnglishActionListener());
+		GridBagConstraints gbc_btnEnglish = new GridBagConstraints();
+		gbc_btnEnglish.fill = GridBagConstraints.BOTH;
+		gbc_btnEnglish.gridx = 3;
+		gbc_btnEnglish.gridy = 0;
+		panel.add(btnEnglish, gbc_btnEnglish);
 		lblBarraEstado.setText("Usted se encuentra en el inicio");
 		if(Internacionalizacion.getIdioma().equals("ingles"))					
 			lblBarraEstado.setText("You are in the home");
-		frame.getContentPane().add(lblBarraEstado, BorderLayout.SOUTH);
 		
 		splitPane = new JSplitPane();
 		frame.getContentPane().add(splitPane, BorderLayout.CENTER);
@@ -149,10 +195,10 @@ public class VentanaPrincipal {
 		JPanel pnlInicio = new JPanel();
 		panelCard.add(pnlInicio, "Inicio");
 		GridBagLayout gbl_pnlInicio = new GridBagLayout();
-		gbl_pnlInicio.columnWidths = new int[]{100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 69, 0};
-		gbl_pnlInicio.rowHeights = new int[]{61, 30, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_pnlInicio.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_pnlInicio.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlInicio.columnWidths = new int[]{69, 100, 100, 88, 20, 100, 100, 100, 100, 100, 0, 0};
+		gbl_pnlInicio.rowHeights = new int[]{61, 30, 27, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_pnlInicio.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_pnlInicio.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlInicio.setLayout(gbl_pnlInicio);						
 		
 		lblBienvenido = new JLabel(Internacionalizacion.getString("VentanaPrincipal.lblBienvendioDeNuevo.text")); //$NON-NLS-1$
@@ -173,14 +219,14 @@ public class VentanaPrincipal {
 		gbc_lblNombre.anchor = GridBagConstraints.WEST;
 		gbc_lblNombre.gridwidth = 3;
 		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNombre.gridx = 4;
+		gbc_lblNombre.gridx = 5;
 		gbc_lblNombre.gridy = 1;
 		pnlInicio.add(lblNombre, gbc_lblNombre);
 		
 		lblFoto = new JLabel(); //$NON-NLS-1$
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
+		gbc_lblFoto.gridwidth = 2;
 		gbc_lblFoto.gridheight = 9;
-		gbc_lblFoto.gridwidth = 3;
 		gbc_lblFoto.insets = new Insets(0, 0, 5, 5);
 		gbc_lblFoto.gridx = 8;
 		gbc_lblFoto.gridy = 1;
@@ -188,8 +234,8 @@ public class VentanaPrincipal {
 		
 		lblUltimoAcceso = new JLabel(Internacionalizacion.getString("VentanaPrincipal.lblUltimoAcceso.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblUltimoAcceso = new GridBagConstraints();
-		gbc_lblUltimoAcceso.anchor = GridBagConstraints.EAST;
 		gbc_lblUltimoAcceso.gridwidth = 2;
+		gbc_lblUltimoAcceso.anchor = GridBagConstraints.EAST;
 		gbc_lblUltimoAcceso.insets = new Insets(0, 0, 5, 5);
 		gbc_lblUltimoAcceso.gridx = 2;
 		gbc_lblUltimoAcceso.gridy = 3;
@@ -200,9 +246,75 @@ public class VentanaPrincipal {
 		gbc_lblUltimoAccesoTexto.anchor = GridBagConstraints.WEST;
 		gbc_lblUltimoAccesoTexto.gridwidth = 2;
 		gbc_lblUltimoAccesoTexto.insets = new Insets(0, 0, 5, 5);
-		gbc_lblUltimoAccesoTexto.gridx = 4;
+		gbc_lblUltimoAccesoTexto.gridx = 5;
 		gbc_lblUltimoAccesoTexto.gridy = 3;
 		pnlInicio.add(lblUltimoAccesoTexto, gbc_lblUltimoAccesoTexto);
+		
+		lblAcercaDeLa = new JLabel(Internacionalizacion.getString("VentanaPrincipal.lblAcercaDeLa.text")); //$NON-NLS-1$
+		lblAcercaDeLa.setForeground(Color.GRAY);
+		lblAcercaDeLa.setFont(new Font("Tahoma", Font.BOLD, 18));
+		GridBagConstraints gbc_lblAcercaDeLa = new GridBagConstraints();
+		gbc_lblAcercaDeLa.anchor = GridBagConstraints.EAST;
+		gbc_lblAcercaDeLa.gridwidth = 3;
+		gbc_lblAcercaDeLa.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAcercaDeLa.gridx = 1;
+		gbc_lblAcercaDeLa.gridy = 18;
+		pnlInicio.add(lblAcercaDeLa, gbc_lblAcercaDeLa);
+		
+		lblAutores = new JLabel(); //$NON-NLS-1$
+		lblAutores.setText(Internacionalizacion.getString("VentanaPrincipal.lblAutores.text")); //$NON-NLS-1$
+		GridBagConstraints gbc_lblAutores = new GridBagConstraints();
+		gbc_lblAutores.anchor = GridBagConstraints.WEST;
+		gbc_lblAutores.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAutores.gridx = 3;
+		gbc_lblAutores.gridy = 19;
+		pnlInicio.add(lblAutores, gbc_lblAutores);
+		
+		lblAutoresTexto = new JLabel(); //$NON-NLS-1$
+		lblAutoresTexto.setText(Internacionalizacion.getString("VentanaPrincipal.lblAutoresTexto.text")); //$NON-NLS-1$
+		GridBagConstraints gbc_lblAutoresTexto = new GridBagConstraints();
+		gbc_lblAutoresTexto.anchor = GridBagConstraints.WEST;
+		gbc_lblAutoresTexto.gridwidth = 2;
+		gbc_lblAutoresTexto.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAutoresTexto.gridx = 5;
+		gbc_lblAutoresTexto.gridy = 19;
+		pnlInicio.add(lblAutoresTexto, gbc_lblAutoresTexto);
+		
+		lblFecha = new JLabel(Internacionalizacion.getString("VentanaPrincipal.lblFecha.text")); //$NON-NLS-1$
+		GridBagConstraints gbc_lblFecha = new GridBagConstraints();
+		gbc_lblFecha.anchor = GridBagConstraints.WEST;
+		gbc_lblFecha.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFecha.gridx = 3;
+		gbc_lblFecha.gridy = 20;
+		pnlInicio.add(lblFecha, gbc_lblFecha);
+		
+		lblFechaTexto = new JLabel(); //$NON-NLS-1$
+		lblFechaTexto.setText(Internacionalizacion.getString("VentanaPrincipal.lblFechaTexto.text")); //$NON-NLS-1$
+		GridBagConstraints gbc_lblFechaTexto = new GridBagConstraints();
+		gbc_lblFechaTexto.gridwidth = 2;
+		gbc_lblFechaTexto.anchor = GridBagConstraints.WEST;
+		gbc_lblFechaTexto.insets = new Insets(0, 0, 5, 5);
+		gbc_lblFechaTexto.gridx = 5;
+		gbc_lblFechaTexto.gridy = 20;
+		pnlInicio.add(lblFechaTexto, gbc_lblFechaTexto);
+		
+		lblVersion = new JLabel(Internacionalizacion.getString("VentanaPrincipal.lblVersion.text")); //$NON-NLS-1$
+		GridBagConstraints gbc_lblVersion = new GridBagConstraints();
+		gbc_lblVersion.anchor = GridBagConstraints.WEST;
+		gbc_lblVersion.insets = new Insets(0, 0, 5, 5);
+		gbc_lblVersion.gridx = 3;
+		gbc_lblVersion.gridy = 21;
+		pnlInicio.add(lblVersion, gbc_lblVersion);
+		
+		lblVersionTexto = new JLabel(); //$NON-NLS-1$
+		lblVersionTexto.setText(Internacionalizacion.getString("VentanaPrincipal.lblVersionTexto.text")); //$NON-NLS-1$
+		GridBagConstraints gbc_lblVersionTexto = new GridBagConstraints();
+		gbc_lblVersionTexto.anchor = GridBagConstraints.WEST;
+		gbc_lblVersionTexto.insets = new Insets(0, 0, 5, 5);
+		gbc_lblVersionTexto.gridx = 5;
+		gbc_lblVersionTexto.gridy = 21;
+		pnlInicio.add(lblVersionTexto, gbc_lblVersionTexto);
+
 		
 		if(Internacionalizacion.getIdioma().equals("espanol")) {
 			JPanel pnlReservaBungalow = new ReservaBungalow();
@@ -299,7 +411,6 @@ public class VentanaPrincipal {
 		}
 	}
 	
-	
 	private void actualizarCampos() {
 		try {
 			File datos = new File("DatosUsuario.txt");
@@ -310,12 +421,32 @@ public class VentanaPrincipal {
 			lblUltimoAccesoTexto.setText(sc.next() + " " + sc.next() + " " + sc.next() + " " + sc.next() + " " + sc.next() + " " + sc.next());
 			
 			sc.close();
-			datos.delete();
 			
 		}catch (FileNotFoundException FNFE) {
 			System.out.println("Fichero con los datos del usuario no encontrado.");
 		}
 		
 	}
+	
+	private class BtnEspanolActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent arg0) {
+			Internacionalizacion.setIdioma("espanol");
+			VentanaPrincipal home = new VentanaPrincipal();
+			home.getFrame().setVisible(true);
+			frame.setVisible(false);
+		}
+	}
+	
+	private class BtnEnglishActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			Internacionalizacion.setIdioma("ingles");
+			VentanaPrincipal home = new VentanaPrincipal();
+			home.getFrame().setVisible(true);
+			frame.setVisible(false);
+		}
+	}
+	
+	
+
 	
 }

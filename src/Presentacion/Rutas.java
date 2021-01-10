@@ -15,6 +15,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
 import Dominio.ClaseDominio;
+import Dominio.Datos;
 
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JRadioButton;
@@ -58,6 +59,7 @@ public class Rutas extends JPanel {
 	private JLabel lblErrorCamposObligatorios;
 	private JLabel lblCrearRuta;
 	private JLabel lblBuscarRutas;
+	private JButton btnAyuda;
 	
 	public Rutas() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
@@ -71,6 +73,22 @@ public class Rutas extends JPanel {
 		if(Internacionalizacion.getIdioma().equals("ingles"))
 			mensaje="Your booking has successfully save";
 		VentanaOK = new ReservaGuardada(mensaje);
+		
+		btnAyuda = new JButton();
+		btnAyuda.addActionListener(new BtnAyudaActionListener());
+		btnAyuda.setIcon(new ImageIcon(Rutas.class.getResource("/Presentacion/Fotos/AyudaIcono.png")));
+		btnAyuda.setOpaque(false);
+		btnAyuda.setMargin(new Insets(0, 0, 0, 0));
+		btnAyuda.setFocusPainted(false);
+		btnAyuda.setContentAreaFilled(false);
+		btnAyuda.setBorderPainted(false);
+		btnAyuda.setBackground((Color) null);
+		GridBagConstraints gbc_btnAyuda = new GridBagConstraints();
+		gbc_btnAyuda.anchor = GridBagConstraints.SOUTHEAST;
+		gbc_btnAyuda.insets = new Insets(0, 0, 5, 5);
+		gbc_btnAyuda.gridx = 0;
+		gbc_btnAyuda.gridy = 0;
+		add(btnAyuda, gbc_btnAyuda);
 		
 		lblCrearRuta = new JLabel(Internacionalizacion.getString("Rutas.lblCrearRuta.text")); //$NON-NLS-1$
 		lblCrearRuta.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -480,6 +498,18 @@ public class Rutas extends JPanel {
 			}
 			
 		}
+	}
+	private class BtnAyudaActionListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			Ayuda ayuda;
+			if(Internacionalizacion.getIdioma().equals("espanol")) {
+				ayuda = new Ayuda(Datos.AyudaRutasESP);
+				ayuda.getFrame().setVisible(true);
+			}
+			else
+				ayuda = new Ayuda(Datos.AyudaRutasENG);
+			ayuda.getFrame().setVisible(true);
+		}		
 	}
 
 }

@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class ReservaGuardada {
 
@@ -46,6 +47,7 @@ public class ReservaGuardada {
 	 */
 	private void initialize(String mensaje) {
 		frame = new JFrame();
+		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(ReservaGuardada.class.getResource("/Presentacion/Fotos/TickIcono.png")));
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 450, 300);
 		frame.getContentPane().setLayout(null);
