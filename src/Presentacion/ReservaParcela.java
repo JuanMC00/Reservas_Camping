@@ -65,17 +65,20 @@ public class ReservaParcela extends JPanel {
 	private JLabel lblErrorCamposObligatorios;
 	private JButton btnAceptar;
 	
-	ReservaGuardada VentanaOK = new ReservaGuardada("Tu reserva se ha guardado con éxito");
+	ReservaGuardada VentanaOK;
 	
 	public ReservaParcela() {
-		setFont(new Font("Tahoma", Font.PLAIN, 18));
-		setBounds(new Rectangle(0, 0, 1450, 980));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{75, 250, 80, 80, 40, 100, 140, 140, 140, 510, 45, 0};
-		gridBagLayout.rowHeights = new int[]{70, 15, 20, 0, 0, 0, 0, 0, 0, 30, 95, 75, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.columnWidths = new int[]{75, 250, 85, 85, 40, 100, 165, 140, 140, 510, 45, 0};
+		gridBagLayout.rowHeights = new int[]{75, 15, 35, 35, 35, 35, 35, 35, 35, 35, 95, 65, 35, 15, 36, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
+
+		String mensaje="Tu reserva se ha guardado con éxito";
+		if(Internacionalizacion.getIdioma().equals("ingles"))
+			mensaje="Your booking has successfully done";
+		VentanaOK = new ReservaGuardada(mensaje);
 		
 		lblDatosCliente = new JLabel(Internacionalizacion.getString("ReservaParcela.lblDatosCliente.text")); //$NON-NLS-1$
 		lblDatosCliente.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -303,7 +306,11 @@ public class ReservaParcela extends JPanel {
 		cboTipo = new JComboBox();
 		cboTipo.addActionListener(new cboTipoActionListener());
 		cboTipo.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cboTipo.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)", "Pequeñas", "Medianas", "Deluxe", "Para Autocaravanas"}));
+		if(Internacionalizacion.getIdioma().equals("espanol"))
+			cboTipo.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)", "Pequeñas", "Medianas", "Deluxe", "For Camper"}));
+		else
+			cboTipo.setModel(new DefaultComboBoxModel(new String[] {"(No selection)", "Small", "Medium", "Deluxe", ""}));
+		
 		GridBagConstraints gbc_cboTipo = new GridBagConstraints();
 		gbc_cboTipo.gridwidth = 3;
 		gbc_cboTipo.insets = new Insets(0, 0, 5, 5);
@@ -444,11 +451,6 @@ public class ReservaParcela extends JPanel {
 		gbc_lblParticularidadesConsultadas.gridy = 22;
 		add(lblParticularidadesConsultadas, gbc_lblParticularidadesConsultadas);
 		
-		btnGuardar = new JButton(Internacionalizacion.getString("ReservaParcela.btnGuardar.text")); //$NON-NLS-1$
-		btnGuardar.setEnabled(false);
-		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnGuardar.addActionListener(new BtnGuardarActionListener());
-		
 		btnLimpiar = new JButton(Internacionalizacion.getString("ReservaParcela.btnLimpiar.text")); //$NON-NLS-1$
 		btnLimpiar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnLimpiar.addActionListener(new BtnLimpiarActionListener());
@@ -456,7 +458,7 @@ public class ReservaParcela extends JPanel {
 		gbc_btnLimpiar.fill = GridBagConstraints.BOTH;
 		gbc_btnLimpiar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnLimpiar.gridx = 6;
-		gbc_btnLimpiar.gridy = 25;
+		gbc_btnLimpiar.gridy = 24;
 		add(btnLimpiar, gbc_btnLimpiar);
 		
 		btnAceptar = new JButton(Internacionalizacion.getString("ReservaParcela.btnAceptar.text")); //$NON-NLS-1$
@@ -466,13 +468,18 @@ public class ReservaParcela extends JPanel {
 		gbc_btnAceptar.fill = GridBagConstraints.BOTH;
 		gbc_btnAceptar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAceptar.gridx = 7;
-		gbc_btnAceptar.gridy = 25;
+		gbc_btnAceptar.gridy = 24;
 		add(btnAceptar, gbc_btnAceptar);
+		
+		btnGuardar = new JButton(Internacionalizacion.getString("ReservaParcela.btnGuardar.text")); //$NON-NLS-1$
+		btnGuardar.setEnabled(false);
+		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnGuardar.addActionListener(new BtnGuardarActionListener());
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.fill = GridBagConstraints.BOTH;
 		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
 		gbc_btnGuardar.gridx = 8;
-		gbc_btnGuardar.gridy = 25;
+		gbc_btnGuardar.gridy = 24;
 		add(btnGuardar, gbc_btnGuardar);
 		
 		lblErrorCamposObligatorios = new JLabel(Internacionalizacion.getString("ReservaParcela.lblErrorCamposObligatorios.text")); //$NON-NLS-1$
@@ -483,7 +490,7 @@ public class ReservaParcela extends JPanel {
 		gbc_lblErrorCamposObligatorios.anchor = GridBagConstraints.WEST;
 		gbc_lblErrorCamposObligatorios.insets = new Insets(0, 0, 5, 5);
 		gbc_lblErrorCamposObligatorios.gridx = 9;
-		gbc_lblErrorCamposObligatorios.gridy = 25;
+		gbc_lblErrorCamposObligatorios.gridy = 24;
 		add(lblErrorCamposObligatorios, gbc_lblErrorCamposObligatorios);
 	}
 	
@@ -605,5 +612,6 @@ public class ReservaParcela extends JPanel {
 			}
 			
 		}
-	}
+	}		
+		
 }

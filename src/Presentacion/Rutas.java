@@ -44,8 +44,8 @@ public class Rutas extends JPanel {
 	private JComboBox cboGradoDificultad;
 	private JLabel lblDescripcion;
 	private JLabel lblEquipamiento;
-	private JLabel lblMapaDeLa;
-	private JButton btnFoto;
+	private JLabel lblMapaRuta;
+	private JButton btnFotoMapaRuta;
 	private JLabel lblPuntoEncuentro;
 	private JTextField txtPuntoEncuentro;
 	private JTextField txtDescripcion;
@@ -53,7 +53,8 @@ public class Rutas extends JPanel {
 	private JButton btnLimpiar;
 	private JButton btnGuardar;
 	
-	ReservaGuardada VentanaOK = new ReservaGuardada("Tu ruta se ha guardado con éxito");
+	ReservaGuardada VentanaOK;
+	
 	private JLabel lblErrorCamposObligatorios;
 	private JLabel lblCrearRuta;
 	private JLabel lblBuscarRutas;
@@ -66,7 +67,12 @@ public class Rutas extends JPanel {
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		lblCrearRuta = new JLabel("Crea tu propia ruta:");
+		String mensaje="Tu ruta se ha guardado con éxito";
+		if(Internacionalizacion.getIdioma().equals("ingles"))
+			mensaje="Your booking has successfully save";
+		VentanaOK = new ReservaGuardada(mensaje);
+		
+		lblCrearRuta = new JLabel(Internacionalizacion.getString("Rutas.lblCrearRuta.text")); //$NON-NLS-1$
 		lblCrearRuta.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GridBagConstraints gbc_lblCrearRuta = new GridBagConstraints();
 		gbc_lblCrearRuta.anchor = GridBagConstraints.SOUTHWEST;
@@ -75,16 +81,16 @@ public class Rutas extends JPanel {
 		gbc_lblCrearRuta.gridy = 1;
 		add(lblCrearRuta, gbc_lblCrearRuta);
 		
-		lblMapaDeLa = new JLabel("Mapa de la Ruta");
-		lblMapaDeLa.setFont(new Font("Tahoma", Font.BOLD, 20));
-		GridBagConstraints gbc_lblMapaDeLa = new GridBagConstraints();
-		gbc_lblMapaDeLa.gridwidth = 3;
-		gbc_lblMapaDeLa.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMapaDeLa.gridx = 9;
-		gbc_lblMapaDeLa.gridy = 1;
-		add(lblMapaDeLa, gbc_lblMapaDeLa);
+		lblMapaRuta = new JLabel(Internacionalizacion.getString("Rutas.lblMapaRuta.text")); //$NON-NLS-1$
+		lblMapaRuta.setFont(new Font("Tahoma", Font.BOLD, 20));
+		GridBagConstraints gbc_lblMapaRuta = new GridBagConstraints();
+		gbc_lblMapaRuta.gridwidth = 3;
+		gbc_lblMapaRuta.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMapaRuta.gridx = 9;
+		gbc_lblMapaRuta.gridy = 1;
+		add(lblMapaRuta, gbc_lblMapaRuta);
 		
-		lblNombre = new JLabel("Nombre(*):");
+		lblNombre = new JLabel(Internacionalizacion.getString("Rutas.lblNombre.text")); //$NON-NLS-1$
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.EAST;
@@ -104,19 +110,19 @@ public class Rutas extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 		
-		btnFoto = new JButton("");
-		btnFoto.addActionListener(new BtnFotoActionListener());
-		btnFoto.setIcon(new ImageIcon(Rutas.class.getResource("/Presentacion/Fotos/Ruta0.png")));
-		GridBagConstraints gbc_btnFoto = new GridBagConstraints();
-		gbc_btnFoto.gridheight = 9;
-		gbc_btnFoto.gridwidth = 3;
-		gbc_btnFoto.fill = GridBagConstraints.BOTH;
-		gbc_btnFoto.insets = new Insets(0, 0, 5, 5);
-		gbc_btnFoto.gridx = 9;
-		gbc_btnFoto.gridy = 2;
-		add(btnFoto, gbc_btnFoto);
+		btnFotoMapaRuta = new JButton(); //$NON-NLS-1$
+		btnFotoMapaRuta.addActionListener(new BtnFotoActionListener());
+		btnFotoMapaRuta.setIcon(new ImageIcon(Rutas.class.getResource("/Presentacion/Fotos/Ruta0.png")));
+		GridBagConstraints gbc_btnFotoMapaRuta = new GridBagConstraints();
+		gbc_btnFotoMapaRuta.gridheight = 9;
+		gbc_btnFotoMapaRuta.gridwidth = 3;
+		gbc_btnFotoMapaRuta.fill = GridBagConstraints.BOTH;
+		gbc_btnFotoMapaRuta.insets = new Insets(0, 0, 5, 5);
+		gbc_btnFotoMapaRuta.gridx = 9;
+		gbc_btnFotoMapaRuta.gridy = 2;
+		add(btnFotoMapaRuta, gbc_btnFotoMapaRuta);
 		
-		lblFecha = new JLabel("Fecha(*):");
+		lblFecha = new JLabel(Internacionalizacion.getString("Rutas.lblFecha.text")); //$NON-NLS-1$
 		lblFecha.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblFecha = new GridBagConstraints();
 		gbc_lblFecha.anchor = GridBagConstraints.EAST;
@@ -135,7 +141,7 @@ public class Rutas extends JPanel {
 		add(txtFecha, gbc_txtFecha);
 		txtFecha.setColumns(10);
 		
-		lblHoraInicio = new JLabel("Hora de inicio(*):");
+		lblHoraInicio = new JLabel(Internacionalizacion.getString("Rutas.lblHoraInicio.text")); //$NON-NLS-1$
 		lblHoraInicio.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblHoraInicio = new GridBagConstraints();
 		gbc_lblHoraInicio.anchor = GridBagConstraints.EAST;
@@ -154,7 +160,7 @@ public class Rutas extends JPanel {
 		add(txtHoraInicio, gbc_txtHoraInicio);
 		txtHoraInicio.setColumns(10);
 		
-		lblHoraFin = new JLabel("Hora de fin(*):");
+		lblHoraFin = new JLabel(Internacionalizacion.getString("Rutas.lblHoraFin.text")); //$NON-NLS-1$
 		lblHoraFin.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblHoraFin = new GridBagConstraints();
 		gbc_lblHoraFin.fill = GridBagConstraints.VERTICAL;
@@ -174,7 +180,7 @@ public class Rutas extends JPanel {
 		add(txtHoraFin, gbc_txtHoraFin);
 		txtHoraFin.setColumns(10);
 		
-		lblPuntoEncuentro = new JLabel("Punto de encuentro(*):");
+		lblPuntoEncuentro = new JLabel(Internacionalizacion.getString("Rutas.lblPuntoEncuentro.text")); //$NON-NLS-1$
 		lblPuntoEncuentro.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblPuntoEncuentro = new GridBagConstraints();
 		gbc_lblPuntoEncuentro.anchor = GridBagConstraints.EAST;
@@ -194,7 +200,7 @@ public class Rutas extends JPanel {
 		add(txtPuntoEncuentro, gbc_txtPuntoEncuentro);
 		txtPuntoEncuentro.setColumns(10);
 		
-		lblMonitor = new JLabel("Monitor(*):");
+		lblMonitor = new JLabel(Internacionalizacion.getString("Rutas.lblMonitor.text")); //$NON-NLS-1$
 		lblMonitor.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblMonitor = new GridBagConstraints();
 		gbc_lblMonitor.fill = GridBagConstraints.VERTICAL;
@@ -214,7 +220,7 @@ public class Rutas extends JPanel {
 		add(txtMonitor, gbc_txtMonitor);
 		txtMonitor.setColumns(10);
 		
-		lblSenderistasMin = new JLabel("Senderistas Mínimos(*):");
+		lblSenderistasMin = new JLabel(Internacionalizacion.getString("Rutas.lblSenderistasMin.text")); //$NON-NLS-1$
 		lblSenderistasMin.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblSenderistasMin = new GridBagConstraints();
 		gbc_lblSenderistasMin.anchor = GridBagConstraints.EAST;
@@ -233,7 +239,7 @@ public class Rutas extends JPanel {
 		gbc_cboSenderistasMin.gridy = 8;
 		add(cboSenderistasMin, gbc_cboSenderistasMin);
 		
-		lblSenderistasMax = new JLabel("Senderistas Máximos(*):");
+		lblSenderistasMax = new JLabel(Internacionalizacion.getString("Rutas.lblSenderistasMax.text")); //$NON-NLS-1$
 		lblSenderistasMax.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblSenderistasMax = new GridBagConstraints();
 		gbc_lblSenderistasMax.anchor = GridBagConstraints.EAST;
@@ -252,7 +258,7 @@ public class Rutas extends JPanel {
 		gbc_cboSenderistasMax.gridy = 9;
 		add(cboSenderistasMax, gbc_cboSenderistasMax);
 		
-		lblGradoDificultad = new JLabel("Grado de dificultad(*):");
+		lblGradoDificultad = new JLabel(Internacionalizacion.getString("Rutas.lblGradoDificultad.text")); //$NON-NLS-1$
 		lblGradoDificultad.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblGradoDificultad = new GridBagConstraints();
 		gbc_lblGradoDificultad.anchor = GridBagConstraints.EAST;
@@ -263,7 +269,11 @@ public class Rutas extends JPanel {
 		
 		cboGradoDificultad = new JComboBox();
 		cboGradoDificultad.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cboGradoDificultad.setModel(new DefaultComboBoxModel(new String[] {"Fácil", "Medio", "Avanzado", "Experto"}));
+		if(Internacionalizacion.getIdioma().equals("espanol"))
+			cboGradoDificultad.setModel(new DefaultComboBoxModel(new String[] {"Fácil", "Medio", "Avanzado", "Experto"}));
+		else
+			cboGradoDificultad.setModel(new DefaultComboBoxModel(new String[] {"Easy", "Medium", "Advanced", "Skilled"}));
+		
 		GridBagConstraints gbc_cboGradoDificultad = new GridBagConstraints();
 		gbc_cboGradoDificultad.insets = new Insets(0, 0, 5, 5);
 		gbc_cboGradoDificultad.fill = GridBagConstraints.HORIZONTAL;
@@ -271,7 +281,7 @@ public class Rutas extends JPanel {
 		gbc_cboGradoDificultad.gridy = 10;
 		add(cboGradoDificultad, gbc_cboGradoDificultad);
 		
-		lblDescripcion = new JLabel("Descripcion(*):");
+		lblDescripcion = new JLabel(Internacionalizacion.getString("Rutas.lblDescripcion.text")); //$NON-NLS-1$
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 		gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
@@ -291,7 +301,7 @@ public class Rutas extends JPanel {
 		add(txtDescripcion, gbc_txtDescripcion);
 		txtDescripcion.setColumns(10);
 		
-		lblEquipamiento = new JLabel("Equipamiento(*):");
+		lblEquipamiento = new JLabel(Internacionalizacion.getString("Rutas.lblEquipamiento.text")); //$NON-NLS-1$
 		lblEquipamiento.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblEquipamiento = new GridBagConstraints();
 		gbc_lblEquipamiento.anchor = GridBagConstraints.EAST;
@@ -311,7 +321,7 @@ public class Rutas extends JPanel {
 		add(txtEquipamiento, gbc_txtEquipamiento);
 		txtEquipamiento.setColumns(10);
 		
-		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar = new JButton(Internacionalizacion.getString("Rutas.btnLimpiar.text")); //$NON-NLS-1$
 		btnLimpiar.addActionListener(new BtnLimpiarActionListener());
 		GridBagConstraints gbc_btnLimpiar = new GridBagConstraints();
 		gbc_btnLimpiar.fill = GridBagConstraints.BOTH;
@@ -320,7 +330,7 @@ public class Rutas extends JPanel {
 		gbc_btnLimpiar.gridy = 16;
 		add(btnLimpiar, gbc_btnLimpiar);
 		
-		btnGuardar = new JButton("Guardar");
+		btnGuardar = new JButton(Internacionalizacion.getString("Rutas.btnGuardar.text")); //$NON-NLS-1$
 		btnGuardar.addActionListener(new BtnGuardarActionListener());
 		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
 		gbc_btnGuardar.fill = GridBagConstraints.BOTH;
@@ -329,7 +339,7 @@ public class Rutas extends JPanel {
 		gbc_btnGuardar.gridy = 16;
 		add(btnGuardar, gbc_btnGuardar);
 		
-		lblErrorCamposObligatorios = new JLabel("Error. Algunos campos obligatorios(*) no han sido rellenados.");
+		lblErrorCamposObligatorios = new JLabel(Internacionalizacion.getString("Rutas.lblErrorCamposObligatorios.text")); //$NON-NLS-1$
 		lblErrorCamposObligatorios.setVisible(false);
 		lblErrorCamposObligatorios.setForeground(Color.RED);
 		lblErrorCamposObligatorios.setFont(new Font("Tahoma", Font.BOLD, 18));
@@ -340,7 +350,7 @@ public class Rutas extends JPanel {
 		gbc_lblErrorCamposObligatorios.gridy = 16;
 		add(lblErrorCamposObligatorios, gbc_lblErrorCamposObligatorios);
 		
-		lblBuscarRutas = new JLabel("Buscar rutas predefinidas:");
+		lblBuscarRutas = new JLabel(Internacionalizacion.getString("Rutas.lblBuscarRutas.text")); //$NON-NLS-1$
 		lblBuscarRutas.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GridBagConstraints gbc_lblBuscarRutas = new GridBagConstraints();
 		gbc_lblBuscarRutas.insets = new Insets(0, 0, 5, 5);
@@ -348,7 +358,7 @@ public class Rutas extends JPanel {
 		gbc_lblBuscarRutas.gridy = 19;
 		add(lblBuscarRutas, gbc_lblBuscarRutas);
 		
-		lblBuscar = new JLabel("Buscar:");
+		lblBuscar = new JLabel(Internacionalizacion.getString("Rutas.lblBuscar.text")); //$NON-NLS-1$
 		lblBuscar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblBuscar = new GridBagConstraints();
 		gbc_lblBuscar.anchor = GridBagConstraints.EAST;
@@ -391,7 +401,7 @@ public class Rutas extends JPanel {
 				cboGradoDificultad.setSelectedIndex(Integer.valueOf(st.nextToken()) - 1);
 				txtDescripcion.setText(st.nextToken());
 				txtEquipamiento.setText(st.nextToken());
-				btnFoto.setIcon(new ImageIcon(ReservaBungalow.class.getResource(st.nextToken())));
+				btnFotoMapaRuta.setIcon(new ImageIcon(ReservaBungalow.class.getResource(st.nextToken())));
 			}
 			
 			
@@ -427,7 +437,7 @@ public class Rutas extends JPanel {
 		txtEquipamiento.setText("");
 		lblErrorCamposObligatorios.setVisible(false);
 		
-		btnFoto.setIcon(new ImageIcon(Rutas.class.getResource("/Presentacion/Fotos/Ruta0.png")));
+		btnFotoMapaRuta.setIcon(new ImageIcon(Rutas.class.getResource("/Presentacion/Fotos/Ruta0.png")));
 	}
 	
 	private class BtnLimpiarActionListener implements ActionListener {
@@ -451,12 +461,12 @@ public class Rutas extends JPanel {
 	private class BtnFotoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			JFileChooser fcAbrir = new JFileChooser();
-			int valorDevuelto = fcAbrir.showDialog(btnFoto, "Cargar foto");
+			int valorDevuelto = fcAbrir.showDialog(btnFotoMapaRuta, "Cargar foto");
 			if (valorDevuelto == JFileChooser.APPROVE_OPTION) {
 				File file = fcAbrir.getSelectedFile();
 				ImageIcon imagen = new ImageIcon(file.getAbsolutePath());
 				if (imagen != null) {
-					btnFoto.setIcon(imagen);
+					btnFotoMapaRuta.setIcon(imagen);
 				}
 			}
 			

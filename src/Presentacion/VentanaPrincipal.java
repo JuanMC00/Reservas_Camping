@@ -51,7 +51,7 @@ public class VentanaPrincipal {
 	private JScrollPane scrollPane;
 	private JTree tree;
 	private JPanel panelCard;
-	private JLabel lblBienvendioDeNuevo;
+	private JLabel lblBienvenido;
 	private JLabel lblNombre;
 	private JLabel lblFoto;
 	private JLabel lblUltimoAcceso;
@@ -89,7 +89,7 @@ public class VentanaPrincipal {
 		frame.setBounds(100, 100, 1450, 980);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		lblBarraEstado = new JLabel("");
+		lblBarraEstado = new JLabel(); //$NON-NLS-1$
 		frame.getContentPane().add(lblBarraEstado, BorderLayout.SOUTH);
 		
 		splitPane = new JSplitPane();
@@ -101,20 +101,40 @@ public class VentanaPrincipal {
 		
 		tree = new JTree();
 		tree.addTreeSelectionListener(new TreeTreeSelectionListener());
-		tree.setModel(new DefaultTreeModel(
-			new DefaultMutableTreeNode("Inicio") {
-				{
-					DefaultMutableTreeNode node_1;
-					node_1 = new DefaultMutableTreeNode("Reserva");
-						node_1.add(new DefaultMutableTreeNode("Bungalow"));
-						node_1.add(new DefaultMutableTreeNode("Parcela"));
-					add(node_1);
-					add(new DefaultMutableTreeNode("Empleados"));
-					add(new DefaultMutableTreeNode("Actividades"));
-					add(new DefaultMutableTreeNode("Rutas"));
+		
+		if(Internacionalizacion.getIdioma().equals("espanol")) {
+			tree.setModel(new DefaultTreeModel(
+				new DefaultMutableTreeNode("Inicio") {
+					{
+						DefaultMutableTreeNode node_1;
+						node_1 = new DefaultMutableTreeNode("Reserva");
+							node_1.add(new DefaultMutableTreeNode("Bungalow"));
+							node_1.add(new DefaultMutableTreeNode("Parcela"));
+						add(node_1);
+						add(new DefaultMutableTreeNode("Empleados"));
+						add(new DefaultMutableTreeNode("Actividades"));
+						add(new DefaultMutableTreeNode("Rutas"));
+					}
 				}
-			}
-		));
+			));
+		
+		}else {
+			tree.setModel(new DefaultTreeModel(
+					new DefaultMutableTreeNode("Home") {
+						{
+							DefaultMutableTreeNode node_1;
+							node_1 = new DefaultMutableTreeNode("Booking");
+								node_1.add(new DefaultMutableTreeNode("Bungalow"));
+								node_1.add(new DefaultMutableTreeNode("Plot"));
+							add(node_1);
+							add(new DefaultMutableTreeNode("Employees"));
+							add(new DefaultMutableTreeNode("Activities"));
+							add(new DefaultMutableTreeNode("Routes"));
+						}
+					}
+				));
+		}
+		
 		
 		scrollPane.setViewportView(tree);
 		tree.setCellRenderer(new RenderizadoArbol());
@@ -132,15 +152,15 @@ public class VentanaPrincipal {
 		gbl_pnlInicio.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		pnlInicio.setLayout(gbl_pnlInicio);						
 		
-		lblBienvendioDeNuevo = new JLabel("Bienvendio de nuevo:");
-		lblBienvendioDeNuevo.setFont(new Font("Tahoma", Font.BOLD, 20));
-		GridBagConstraints gbc_lblBienvendioDeNuevo = new GridBagConstraints();
-		gbc_lblBienvendioDeNuevo.anchor = GridBagConstraints.EAST;
-		gbc_lblBienvendioDeNuevo.gridwidth = 3;
-		gbc_lblBienvendioDeNuevo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblBienvendioDeNuevo.gridx = 1;
-		gbc_lblBienvendioDeNuevo.gridy = 1;
-		pnlInicio.add(lblBienvendioDeNuevo, gbc_lblBienvendioDeNuevo);
+		lblBienvenido = new JLabel(Internacionalizacion.getString("VentanaPrincipal.lblBienvendioDeNuevo.text")); //$NON-NLS-1$
+		lblBienvenido.setFont(new Font("Tahoma", Font.BOLD, 20));
+		GridBagConstraints gbc_lblBienvenido = new GridBagConstraints();
+		gbc_lblBienvenido.anchor = GridBagConstraints.EAST;
+		gbc_lblBienvenido.gridwidth = 3;
+		gbc_lblBienvenido.insets = new Insets(0, 0, 5, 5);
+		gbc_lblBienvenido.gridx = 1;
+		gbc_lblBienvenido.gridy = 1;
+		pnlInicio.add(lblBienvenido, gbc_lblBienvenido);
 		
 		lblNombre = new JLabel("");
 		lblNombre.setForeground(Color.GRAY);
@@ -154,7 +174,7 @@ public class VentanaPrincipal {
 		gbc_lblNombre.gridy = 1;
 		pnlInicio.add(lblNombre, gbc_lblNombre);
 		
-		lblFoto = new JLabel("");
+		lblFoto = new JLabel(); //$NON-NLS-1$
 		GridBagConstraints gbc_lblFoto = new GridBagConstraints();
 		gbc_lblFoto.gridheight = 9;
 		gbc_lblFoto.gridwidth = 3;
@@ -163,7 +183,7 @@ public class VentanaPrincipal {
 		gbc_lblFoto.gridy = 1;
 		pnlInicio.add(lblFoto, gbc_lblFoto);
 		
-		lblUltimoAcceso = new JLabel("Último acceso:");
+		lblUltimoAcceso = new JLabel(Internacionalizacion.getString("VentanaPrincipal.lblUltimoAcceso.text")); //$NON-NLS-1$
 		GridBagConstraints gbc_lblUltimoAcceso = new GridBagConstraints();
 		gbc_lblUltimoAcceso.anchor = GridBagConstraints.EAST;
 		gbc_lblUltimoAcceso.gridwidth = 2;
@@ -181,20 +201,39 @@ public class VentanaPrincipal {
 		gbc_lblUltimoAccesoTexto.gridy = 3;
 		pnlInicio.add(lblUltimoAccesoTexto, gbc_lblUltimoAccesoTexto);
 		
-		JPanel pnlReservaBungalow = new ReservaBungalow();
-		panelCard.add(pnlReservaBungalow, "Bungalow");
-		
-		JPanel pnlReservaParcela = new ReservaParcela();
-		panelCard.add(pnlReservaParcela, "Parcela");
-		
-		JPanel pnlEmpleados = new Empleados();
-		panelCard.add(pnlEmpleados, "Empleados");
-		
-		JPanel pnlActividades = new Actividades();
-		panelCard.add(pnlActividades, "Actividades");
-		
-		JPanel pnlRutas = new Rutas();
-		panelCard.add(pnlRutas, "Rutas");
+		if(Internacionalizacion.getIdioma().equals("espanol")) {
+			JPanel pnlReservaBungalow = new ReservaBungalow();
+			panelCard.add(pnlReservaBungalow, "Bungalow");
+			
+			JPanel pnlReservaParcela = new ReservaParcela();
+			panelCard.add(pnlReservaParcela, "Parcela");
+			
+			JPanel pnlEmpleados = new Empleados();
+			panelCard.add(pnlEmpleados, "Empleados");
+			
+			JPanel pnlActividades = new Actividades();
+			panelCard.add(pnlActividades, "Actividades");
+			
+			JPanel pnlRutas = new Rutas();
+			panelCard.add(pnlRutas, "Rutas");
+		}
+		else {
+			JPanel pnlReservaBungalow = new ReservaBungalow();
+			panelCard.add(pnlReservaBungalow, "Bungalow");
+			
+			JPanel pnlReservaParcela = new ReservaParcela();
+			panelCard.add(pnlReservaParcela, "Plot");
+			
+			JPanel pnlEmpleados = new Empleados();
+			panelCard.add(pnlEmpleados, "Employees");
+			
+			JPanel pnlActividades = new Actividades();
+			panelCard.add(pnlActividades, "Activities");
+			
+			JPanel pnlRutas = new Rutas();
+			panelCard.add(pnlRutas, "Routes");
+			
+		}
 		
 		actualizarCampos();
 
@@ -206,28 +245,50 @@ public class VentanaPrincipal {
 			String nodo = (e.getPath().getLastPathComponent()).toString();
 			
 			switch (nodo){
+				case "Home":
+				case "Inicio":
+					lblBarraEstado.setText("Usted se encuentra en el inicio");
+					if(Internacionalizacion.getIdioma().equals("ingles"))					
+						lblBarraEstado.setText("You are in the home");
+					((CardLayout) panelCard.getLayout()).show(panelCard, nodo);
+					break;
+					
 				case "Bungalow":
 					lblBarraEstado.setText("Usted se encuentra en la reserva de bungalow");
+					if(Internacionalizacion.getIdioma().equals("ingles"))					
+						lblBarraEstado.setText("You are in the booking section");
 					((CardLayout) panelCard.getLayout()).show(panelCard, nodo);
 					break;
-					
+				
+				case "Plot":
 				case "Parcela":
 					lblBarraEstado.setText("Usted se encuentra en la reserva de parcelas");
+					if(Internacionalizacion.getIdioma().equals("ingles"))					
+						lblBarraEstado.setText("You are in the booking section");
 					((CardLayout) panelCard.getLayout()).show(panelCard, nodo);
 					break;
 					
+				case "Employees":
 				case "Empleados":
 					lblBarraEstado.setText("Usted se encuentra en la gestion de empleados");
+					if(Internacionalizacion.getIdioma().equals("ingles"))					
+						lblBarraEstado.setText("You are in the employees managment section");
 					((CardLayout) panelCard.getLayout()).show(panelCard, nodo);
 					break;
 					
+				case "Activities":
 				case "Actividades":
 					lblBarraEstado.setText("Usted se encuentra en la gestion de actividades");
+					if(Internacionalizacion.getIdioma().equals("ingles"))					
+						lblBarraEstado.setText("You are in the activities managment section");
 					((CardLayout) panelCard.getLayout()).show(panelCard, nodo);
 					break;
 					
+				case "Routes":
 				case "Rutas":
-					lblBarraEstado.setText("Usted se encuentra en la visualización y creacion de rutas");
+					lblBarraEstado.setText("You are in the route section");
+					if(Internacionalizacion.getIdioma().equals("ingles"))					
+						lblBarraEstado.setText("");
 					((CardLayout) panelCard.getLayout()).show(panelCard, nodo);
 					break;
 			}
@@ -243,9 +304,10 @@ public class VentanaPrincipal {
 			
 			lblNombre.setText(sc.next() + " " + sc.next() + ", " + sc.next());
 			lblFoto.setIcon(new ImageIcon(VentanaPrincipal.class.getResource((String)sc.next())));
-			lblUltimoAccesoTexto.setText(sc.next());
+			lblUltimoAccesoTexto.setText(sc.next() + " " + sc.next() + " " + sc.next() + " " + sc.next() + " " + sc.next() + " " + sc.next());
 			
 			sc.close();
+			datos.delete();
 			
 		}catch (FileNotFoundException FNFE) {
 			System.out.println("Fichero con los datos del usuario no encontrado.");

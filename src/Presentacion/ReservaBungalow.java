@@ -72,18 +72,23 @@ public class ReservaBungalow extends JPanel {
 	private JButton btnBuscar;
 	private JButton btnAceptar;
 	
-	ReservaGuardada VentanaOK = new ReservaGuardada("Tu reserva se ha guardado con éxito");
+	ReservaGuardada VentanaOK;
 	
 	public ReservaBungalow() {
 		setBounds(new Rectangle(0, 0, 1450, 980));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{75, 250, 80, 80, 40, 100, 140, 140, 140, 510, 45, 0};
-		gridBagLayout.rowHeights = new int[]{70, 15, 20, 0, 0, 0, 0, 0, 0, 30, 95, 75, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 0};
+		gridBagLayout.columnWidths = new int[]{75, 250, 85, 85, 40, 100, 165, 140, 140, 510, 45, 0};
+		gridBagLayout.rowHeights = new int[]{75, 15, 35, 35, 35, 35, 35, 35, 35, 35, 95, 65, 35, 15, 36, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
 		
-		lblDatosCliente = new JLabel("Datos cliente");
+		String mensaje="Tu reserva se ha guardado con éxito";
+		if(Internacionalizacion.getIdioma().equals("ingles"))
+			mensaje="Your booking has successfully done";
+		VentanaOK = new ReservaGuardada(mensaje);
+		
+		lblDatosCliente = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblDatosCliente.text")); //$NON-NLS-1$
 		lblDatosCliente.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GridBagConstraints gbc_lblDatosCliente = new GridBagConstraints();
 		gbc_lblDatosCliente.anchor = GridBagConstraints.SOUTHEAST;
@@ -92,7 +97,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_lblDatosCliente.gridy = 0;
 		add(lblDatosCliente, gbc_lblDatosCliente);
 		
-		lblFotoCampingTexto = new JLabel("Foto del Camping");
+		lblFotoCampingTexto = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblFotoCampingTexto.text")); //$NON-NLS-1$
 		lblFotoCampingTexto.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GridBagConstraints gbc_lblFotoCampingTexto = new GridBagConstraints();
 		gbc_lblFotoCampingTexto.anchor = GridBagConstraints.SOUTH;
@@ -110,7 +115,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_lblFotoCamping.gridy = 1;
 		add(lblFotoCamping, gbc_lblFotoCamping);
 		
-		lblNombre = new JLabel("Nombre(*):");
+		lblNombre = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblNombre.text")); //$NON-NLS-1$
 		lblNombre.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
 		gbc_lblNombre.anchor = GridBagConstraints.EAST;
@@ -130,7 +135,7 @@ public class ReservaBungalow extends JPanel {
 		add(txtNombre, gbc_txtNombre);
 		txtNombre.setColumns(10);
 		
-		lblApellidos = new JLabel("Apellidos(*):");
+		lblApellidos = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblApellidos.text")); //$NON-NLS-1$
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblApellidos = new GridBagConstraints();
 		gbc_lblApellidos.anchor = GridBagConstraints.EAST;
@@ -150,7 +155,7 @@ public class ReservaBungalow extends JPanel {
 		add(txtApellidos, gbc_txtApellidos);
 		txtApellidos.setColumns(10);
 		
-		lblTelefono = new JLabel("Telefono(*):");
+		lblTelefono = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblTelefono.text")); //$NON-NLS-1$
 		lblTelefono.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblTelefono = new GridBagConstraints();
 		gbc_lblTelefono.anchor = GridBagConstraints.EAST;
@@ -170,7 +175,7 @@ public class ReservaBungalow extends JPanel {
 		add(txtTelefono, gbc_txtTelefono);
 		txtTelefono.setColumns(10);
 		
-		lblEmail = new JLabel("Email:");
+		lblEmail = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblEmail.text")); //$NON-NLS-1$
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
 		gbc_lblEmail.anchor = GridBagConstraints.EAST;
@@ -181,7 +186,7 @@ public class ReservaBungalow extends JPanel {
 		
 		txtEmail = new JTextField();
 		txtEmail.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		txtEmail.setText("");
+		txtEmail.setText(""); //$NON-NLS-1$
 		GridBagConstraints gbc_txtEmail = new GridBagConstraints();
 		gbc_txtEmail.gridwidth = 2;
 		gbc_txtEmail.insets = new Insets(0, 0, 5, 5);
@@ -191,7 +196,7 @@ public class ReservaBungalow extends JPanel {
 		add(txtEmail, gbc_txtEmail);
 		txtEmail.setColumns(10);
 		
-		lblNumOcupantes = new JLabel("Nº Ocupantes(*):");
+		lblNumOcupantes = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblNumOcupantes.text")); //$NON-NLS-1$
 		lblNumOcupantes.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblNumOcupantes = new GridBagConstraints();
 		gbc_lblNumOcupantes.anchor = GridBagConstraints.EAST;
@@ -210,7 +215,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_cboNumOcupantes.gridy = 6;
 		add(cboNumOcupantes, gbc_cboNumOcupantes);
 		
-		lblHoraLlegada = new JLabel("Hora aproximada de llegada(*):");
+		lblHoraLlegada = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblHoraLlegada.text")); //$NON-NLS-1$
 		lblHoraLlegada.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblHoraLlegada = new GridBagConstraints();
 		gbc_lblHoraLlegada.anchor = GridBagConstraints.EAST;
@@ -231,7 +236,7 @@ public class ReservaBungalow extends JPanel {
 		add(txtHoraLlegada, gbc_txtHoraLlegada);
 		txtHoraLlegada.setColumns(10);
 		
-		lblHoraSalida = new JLabel("Hora aproximada de salida(*):");
+		lblHoraSalida = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblHoraSalida.text")); //$NON-NLS-1$
 		lblHoraSalida.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblHoraSalida = new GridBagConstraints();
 		gbc_lblHoraSalida.anchor = GridBagConstraints.EAST;
@@ -251,7 +256,7 @@ public class ReservaBungalow extends JPanel {
 		add(txtHoraSalida, gbc_txtHoraSalida);
 		txtHoraSalida.setColumns(10);
 		
-		lblSolicitudesEspeciales = new JLabel("Solicitudes especiales:");
+		lblSolicitudesEspeciales = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblSolicitudesEspeciales.text")); //$NON-NLS-1$
 		lblSolicitudesEspeciales.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblSolicitudesEspeciales = new GridBagConstraints();
 		gbc_lblSolicitudesEspeciales.anchor = GridBagConstraints.EAST;
@@ -271,7 +276,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_txtaSolicitudesEspeciales.gridy = 9;
 		add(txtaSolicitudesEspeciales, gbc_txtaSolicitudesEspeciales);
 		
-		lblDatosBungalow = new JLabel("Datos bungalow");
+		lblDatosBungalow = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblDatosBungalow.text")); //$NON-NLS-1$
 		lblDatosBungalow.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GridBagConstraints gbc_lblDatosBungalow = new GridBagConstraints();
 		gbc_lblDatosBungalow.anchor = GridBagConstraints.SOUTHEAST;
@@ -280,7 +285,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_lblDatosBungalow.gridy = 12;
 		add(lblDatosBungalow, gbc_lblDatosBungalow);
 		
-		lblFotoBungalowTexto = new JLabel("Foto del Bungalow");
+		lblFotoBungalowTexto = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblFotoBungalowTexto.text")); //$NON-NLS-1$
 		lblFotoBungalowTexto.setFont(new Font("Tahoma", Font.BOLD, 20));
 		GridBagConstraints gbc_lblFotoBungalowTexto = new GridBagConstraints();
 		gbc_lblFotoBungalowTexto.anchor = GridBagConstraints.SOUTH;
@@ -298,7 +303,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_lblFotoBungalow.gridy = 13;
 		add(lblFotoBungalow, gbc_lblFotoBungalow);
 		
-		lblTamano = new JLabel("Tamaño(*):");
+		lblTamano = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblTamano.text")); //$NON-NLS-1$
 		lblTamano.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblTamano = new GridBagConstraints();
 		gbc_lblTamano.anchor = GridBagConstraints.EAST;
@@ -310,7 +315,11 @@ public class ReservaBungalow extends JPanel {
 		cboTamano = new JComboBox();
 		cboTamano.addActionListener(new cboTamanoActionListener());
 		cboTamano.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cboTamano.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)", "Pequeños", "Medianos", "Grandes", "Deluxe"}));
+		if(Internacionalizacion.getIdioma().equals("espanol"))
+			cboTamano.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)", "Pequeños", "Medianos", "Grandes", "Deluxe"}));
+		else
+			cboTamano.setModel(new DefaultComboBoxModel(new String[] {"(No selection)", "Small", "Medium", "Big", "Deluxe"}));
+		
 		GridBagConstraints gbc_cboTamano = new GridBagConstraints();
 		gbc_cboTamano.gridwidth = 3;
 		gbc_cboTamano.insets = new Insets(0, 0, 5, 5);
@@ -319,7 +328,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_cboTamano.gridy = 14;
 		add(cboTamano, gbc_cboTamano);
 		
-		btnGaleria = new JButton("Ver Galería");
+		btnGaleria = new JButton(Internacionalizacion.getString("ReservaBungalow.btnGaleria.text")); //$NON-NLS-1$
 		btnGaleria.addActionListener(new BtnGaleriaActionListener());
 		btnGaleria.setMinimumSize(new Dimension(100, 29));
 		btnGaleria.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -330,7 +339,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_btnGaleria.gridy = 14;
 		add(btnGaleria, gbc_btnGaleria);
 		
-		lblCapacidadMax = new JLabel("Capacidad Máxima(*):");
+		lblCapacidadMax = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblCapacidadMax.text")); //$NON-NLS-1$
 		lblCapacidadMax.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblCapacidadMax = new GridBagConstraints();
 		gbc_lblCapacidadMax.insets = new Insets(0, 0, 5, 5);
@@ -350,7 +359,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_cboCapacidadMax.gridy = 15;
 		add(cboCapacidadMax, gbc_cboCapacidadMax);
 		
-		lblFechaLlegada = new JLabel("Fecha de llegada(*):");
+		lblFechaLlegada = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblFechaLlegada.text")); //$NON-NLS-1$
 		lblFechaLlegada.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblFechaLlegada = new GridBagConstraints();
 		gbc_lblFechaLlegada.anchor = GridBagConstraints.EAST;
@@ -370,7 +379,7 @@ public class ReservaBungalow extends JPanel {
 		add(txtFechaLlegada, gbc_txtFechaLlegada);
 		txtFechaLlegada.setColumns(10);
 		
-		lblFechaSalida = new JLabel("Fecha de salida(*):");
+		lblFechaSalida = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblFechaSalida.text")); //$NON-NLS-1$
 		lblFechaSalida.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblFechaSalida = new GridBagConstraints();
 		gbc_lblFechaSalida.anchor = GridBagConstraints.EAST;
@@ -390,7 +399,7 @@ public class ReservaBungalow extends JPanel {
 		add(txtFechaSalida, gbc_txtFechaSalida);
 		txtFechaSalida.setColumns(10);
 		
-		lblPrecioNoche = new JLabel("Precio por noche:");
+		lblPrecioNoche = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblPrecioNoche.text")); //$NON-NLS-1$
 		lblPrecioNoche.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblPrecioNoche = new GridBagConstraints();
 		gbc_lblPrecioNoche.anchor = GridBagConstraints.EAST;
@@ -407,7 +416,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_lblPrecioNocheConsultado.gridy = 18;
 		add(lblPrecioNocheConsultado, gbc_lblPrecioNocheConsultado);
 		
-		lblPrecioTotal = new JLabel("Precio Total:");
+		lblPrecioTotal = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblPrecioTotal.text")); //$NON-NLS-1$
 		lblPrecioTotal.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblPrecioTotal = new GridBagConstraints();
 		gbc_lblPrecioTotal.anchor = GridBagConstraints.EAST;
@@ -424,7 +433,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_lblPrecioTotalConsultado.gridy = 19;
 		add(lblPrecioTotalConsultado, gbc_lblPrecioTotalConsultado);
 		
-		lblEquipamiento = new JLabel("Equipamiento:");
+		lblEquipamiento = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblEquipamiento.text")); //$NON-NLS-1$
 		lblEquipamiento.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblEquipamiento = new GridBagConstraints();
 		gbc_lblEquipamiento.anchor = GridBagConstraints.EAST;
@@ -436,7 +445,11 @@ public class ReservaBungalow extends JPanel {
 		cboEquipamiento = new JComboBox();
 		cboEquipamiento.addActionListener(new cboEquipamientoActionListener());
 		cboEquipamiento.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cboEquipamiento.setModel(new DefaultComboBoxModel(new String[] {"Básico", "Menaje", "Microondas", "Ropa de cama", "Toallas", "WiFi", "Otros"}));
+		if(Internacionalizacion.getIdioma().equals("espanol"))
+			cboEquipamiento.setModel(new DefaultComboBoxModel(new String[] {"Básico", "Menaje", "Microondas", "Ropa de cama", "Toallas", "WiFi", "Otros"}));
+		else
+			cboEquipamiento.setModel(new DefaultComboBoxModel(new String[] {"Basic", "Household", "Microwave", "Bed sheets", "towels", "WiFi", "Other"}));
+		
 		GridBagConstraints gbc_cboEquipamiento = new GridBagConstraints();
 		gbc_cboEquipamiento.gridwidth = 3;
 		gbc_cboEquipamiento.insets = new Insets(0, 0, 5, 5);
@@ -445,13 +458,13 @@ public class ReservaBungalow extends JPanel {
 		gbc_cboEquipamiento.gridy = 21;
 		add(cboEquipamiento, gbc_cboEquipamiento);
 		
-		lblEquipamientoExtra = new JLabel("Equipamiento extra:");
+		lblEquipamientoExtra = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblEquipamientoExtra.text")); //$NON-NLS-1$
 		lblEquipamientoExtra.setMinimumSize(new Dimension(100, 20));
 		lblEquipamientoExtra.setEnabled(false);
 		lblEquipamientoExtra.setVisible(false);
 		lblEquipamientoExtra.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblEquipamientoExtra = new GridBagConstraints();
-		gbc_lblEquipamientoExtra.anchor = GridBagConstraints.EAST;
+		gbc_lblEquipamientoExtra.fill = GridBagConstraints.HORIZONTAL;
 		gbc_lblEquipamientoExtra.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEquipamientoExtra.gridx = 6;
 		gbc_lblEquipamientoExtra.gridy = 21;
@@ -470,7 +483,7 @@ public class ReservaBungalow extends JPanel {
 		add(txtEquipamientoExtra, gbc_txtEquipamientoExtra);
 		txtEquipamientoExtra.setColumns(10);
 		
-		lblDescripcion = new JLabel("Descripción:");
+		lblDescripcion = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblDescripcion.text")); //$NON-NLS-1$
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblDescripcion = new GridBagConstraints();
 		gbc_lblDescripcion.anchor = GridBagConstraints.EAST;
@@ -479,16 +492,16 @@ public class ReservaBungalow extends JPanel {
 		gbc_lblDescripcion.gridy = 22;
 		add(lblDescripcion, gbc_lblDescripcion);
 		
-		btnGuardar = new JButton("Guardar");
+		btnGuardar = new JButton(Internacionalizacion.getString("ReservaBungalow.btnGuardar.text")); //$NON-NLS-1$
 		btnGuardar.setEnabled(false);
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnGuardar.addActionListener(new BtnGuardarActionListener());
 		
-		btnLimpiar = new JButton("Limpiar");
+		btnLimpiar = new JButton(Internacionalizacion.getString("ReservaBungalow.btnLimpiar.text")); //$NON-NLS-1$
 		btnLimpiar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnLimpiar.addActionListener(new BtnLimpiarActionListener());
 		
-		lblDescripcionTexto = new JLabel("");
+		lblDescripcionTexto = new JLabel(); //$NON-NLS-1$
 		lblDescripcionTexto.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblDescripcionTexto = new GridBagConstraints();
 		gbc_lblDescripcionTexto.anchor = GridBagConstraints.WEST;
@@ -504,7 +517,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_btnLimpiar.gridy = 24;
 		add(btnLimpiar, gbc_btnLimpiar);
 		
-		btnAceptar = new JButton("Aceptar");
+		btnAceptar = new JButton(Internacionalizacion.getString("ReservaBungalow.btnAceptar.text")); //$NON-NLS-1$
 		btnAceptar.addActionListener(new BtnAceptarActionListener());
 		btnAceptar.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_btnAceptar = new GridBagConstraints();
@@ -520,7 +533,7 @@ public class ReservaBungalow extends JPanel {
 		gbc_btnGuardar.gridy = 24;
 		add(btnGuardar, gbc_btnGuardar);
 		
-		lblErrorCamposObligatorios = new JLabel("Error. Algunos obligatorios(*) no han sido rellenados.");
+		lblErrorCamposObligatorios = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblErrorCamposObligatorios.text")); //$NON-NLS-1$
 		lblErrorCamposObligatorios.setVisible(false);
 		lblErrorCamposObligatorios.setForeground(Color.RED);
 		lblErrorCamposObligatorios.setFont(new Font("Tahoma", Font.BOLD, 18));

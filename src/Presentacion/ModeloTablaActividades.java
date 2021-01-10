@@ -5,12 +5,22 @@ import javax.swing.table.*;
 
 public class ModeloTablaActividades extends AbstractTableModel {
 
-	private String[] nombreColumnas = {"Actividad", "Monitor", "Horario", "Aforo minimo", "Aforo maximo", "Para adultos", "Para niños",
-			"Precio Hora", "Precio Mes", "Area", "Descripcion", "Equipamiento"};
+	private String[] nombreColumnas = setnombreColumnas(); 
 	private Vector datos = new Vector();
 
 	public int getColumnCount() {
 		return nombreColumnas.length;
+	}
+
+	private String[] setnombreColumnas() {
+		String[] columnas = {"Actividad", "Monitor", "Horario", "Aforo minimo", "Aforo maximo", "Para adultos", "Para niños",
+				"Precio Hora", "Precio Mes", "Area", "Descripcion", "Equipamiento"};
+		
+		if(Internacionalizacion.getIdioma().equals("ingles")) 
+			columnas = new String[] {"Activity", "Monitor", "Timetable", "Minimun Capacity", "Maximun Capacity", "For Adults", "For kids",
+			"Price per hour", "Price ", "Place", "Description", "Equipment"};			
+		
+		return columnas;
 	}
 
 	public int getRowCount() {

@@ -32,7 +32,6 @@ public class Login {
 	private JButton btnEntrar;
 	private JTextArea txtrBienvenida;
 	private JLabel lblInfoLogin;
-	private String idioma;
 
 	/**
 	 * Launch the application.
@@ -41,6 +40,7 @@ public class Login {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					Internacionalizacion.setIdioma("espanol");
 					Login window = new Login();
 					window.login.setVisible(true);
 				} catch (Exception e) {
@@ -53,7 +53,7 @@ public class Login {
 	/**
 	 * Create the application.
 	 */
-	public Login() {
+	public Login() {		
 		initialize();
 	}
 
@@ -66,6 +66,7 @@ public class Login {
 		login.setBounds(100, 100, 520, 252);
 		login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		login.getContentPane().setLayout(null);
+		
 		
 		lblUsuario = new JLabel(Internacionalizacion.getString("Login.lblUsuario.text")); //$NON-NLS-1$
 		lblUsuario.setHorizontalAlignment(SwingConstants.RIGHT);
@@ -174,16 +175,15 @@ public class Login {
 			Login login2 = new Login();
 			login.setVisible(false);
 			login2.login.setVisible(true);
-			idioma="ingles";
 		}
 	}
+	
 	private class BtnEspanolActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			Internacionalizacion.setIdioma("espanol");
 			Login login2 = new Login();
 			login.setVisible(false);
 			login2.login.setVisible(true);
-			idioma="espanol";
 		}
 	}
 	

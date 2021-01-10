@@ -24,6 +24,7 @@ public class Internacionalizacion {
 	private static ResourceBundle loadBundle() {
 		return ResourceBundle.getBundle(BUNDLE_NAME);
 	}
+	private static String idioma;
 	////////////////////////////////////////////////////////////////////////////
 	//
 	// Strings access
@@ -40,14 +41,23 @@ public class Internacionalizacion {
 	
 	private static Locale getLocale(String appIdioma){
 		Locale locale=new Locale("es");
-		if (appIdioma.equals("ingles"))
+		if (appIdioma.equals("ingles")) {
 			locale = new Locale("en");
-		if(appIdioma.contentEquals("espanol"))
+			idioma="ingles";
+		}
+		
+		if(appIdioma.contentEquals("espanol")) {
 			locale = new Locale("es");
+			idioma="espanol";
+		}
 		return locale;
 	}
 	
 	public static void setIdioma(String idioma){
 		RESOURCE_BUNDLE= ResourceBundle.getBundle(BUNDLE_NAME, getLocale(idioma));
+	}
+	
+	public static String getIdioma(){
+		return idioma;
 	}
 }

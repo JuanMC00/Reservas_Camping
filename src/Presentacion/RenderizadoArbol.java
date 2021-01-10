@@ -18,14 +18,17 @@ public class RenderizadoArbol extends DefaultTreeCellRenderer {
 		String c = (String)(nodo.getUserObject());
 		
 		switch (c){
+			case "Home":
 			case "Inicio":
 				setIcon(new ImageIcon(RenderizadoArbol.class.getResource("/Presentacion/Fotos/InicioIcono.png")));
 				break;
 				
+			case "Booking":
 			case "Reserva":
 				setIcon(new ImageIcon(RenderizadoArbol.class.getResource("/Presentacion/Fotos/ReservaIcono.png")));
 				break;				
 				
+			case "Plot":
 			case "Parcela":
 				setIcon(new ImageIcon(RenderizadoArbol.class.getResource("/Presentacion/Fotos/ParcelaIcono.png")));
 				break;
@@ -34,21 +37,21 @@ public class RenderizadoArbol extends DefaultTreeCellRenderer {
 				setIcon(new ImageIcon(RenderizadoArbol.class.getResource("/Presentacion/Fotos/bungalowIcono.png")));
 				break;
 				
+			case "Activities":
 			case "Actividades":
 				setIcon(new ImageIcon(RenderizadoArbol.class.getResource("/Presentacion/Fotos/ActividadesIcono.png")));
 				break;
 				
+			case "Employees":
 			case "Empleados":
 				setIcon(new ImageIcon(RenderizadoArbol.class.getResource("/Presentacion/Fotos/EmpleadosIcono.png")));
 				break;
 				
+			case "Routes":
 			case "Rutas":
 				setIcon(new ImageIcon(RenderizadoArbol.class.getResource("/Presentacion/Fotos/RutasIcono.png")));
 				break;
-				
-			default:
-				setIcon(new ImageIcon(RenderizadoArbol.class.getResource("/Presentacion/Fotos/pantalla.png")));
-				break;
+
 		}
 		return this;
 	}

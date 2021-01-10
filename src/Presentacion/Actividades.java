@@ -34,12 +34,12 @@ public class Actividades extends JPanel {
 		pnlBotones = new JPanel();
 		add(pnlBotones, BorderLayout.SOUTH);
 
-		btnAlta = new JButton("Dar de alta");
+		btnAlta = new JButton(Internacionalizacion.getString("Actividades.btnAlta.text")); //$NON-NLS-1$
 		btnAlta.addActionListener(new BtnAltaActionListener());
 
 		pnlBotones.add(btnAlta);
 
-		btnBaja = new JButton("Dar de baja");
+		btnBaja = new JButton(Internacionalizacion.getString("Actividades.btnBaja.text")); //$NON-NLS-1$
 		btnBaja.addActionListener(new BtnBajaActionListener());
 		pnlBotones.add(btnBaja);
 
@@ -70,16 +70,16 @@ public class Actividades extends JPanel {
 		clmAforoMin.setCellEditor(new DefaultCellEditor(cboAforoMax));
 		clmAforoMax.setCellEditor(new DefaultCellEditor(cboAforoMax));
 
-		Object[] fila1 = { "Tiro con Arco", "Carlos", "16:00-17:00", "3", "8", true, true, 8.55, 35.00,
-				"Bosque Aventura", "La mejor actividad para mejorar tu punteria", "Ropa de deporte" };
+		Object[] fila1 = {"Tiro con Arco", "Carlos", "16:00-17:00", "3", "8", true, true, 8.55, 35.00,
+				"Bosque Aventura", "La mejor actividad para mejorar tu punteria", "Ropa de deporte"};
 		modeloTabla.addFila(fila1);
 
-		Object[] fila2 = { "Submarinismo", "Bruno", "17:00-18:30", "2", "3", true, true, 15.95, 100.00, "Cala Secreta",
-				"Sumergete en una aventura submarina", "Gafas de buceo y aletas" };
+		Object[] fila2 = {"Submarinismo", "Bruno", "17:00-18:30", "2", "3", true, true, 15.95, 100.00, "Cala Secreta",
+				"Sumergete en una aventura submarina", "Gafas de buceo y aletas"};
 		modeloTabla.addFila(fila2);
 
-		Object[] fila3 = { "Fiesta de la espuma", "Sergio", "19:00-20:00", "15", "30", false, true, 3.25, 15.00,
-				"Castillo espumoso", "¡Corre!, ¡esquiva los cañonazos de espuma!", "Bañador y chanclas" };
+		Object[] fila3 = {"Fiesta de la espuma", "Sergio", "19:00-20:00", "15", "30", false, true, 3.25, 15.00,
+				"Castillo espumoso", "¡Corre!, ¡esquiva los cañonazos de espuma!", "Bañador y chanclas"};
 		modeloTabla.addFila(fila3);
 
 		tbActividades.getColumnModel().getColumn(0).setResizable(false);
@@ -140,35 +140,6 @@ public class Actividades extends JPanel {
 
 		}
 	}
-	
-	
-	/*private class TbActividadesMouseListener extends MouseAdapter {
 
-		@Override
-		public void mousePressed(MouseEvent e) {
-			ModeloTablaActividades modeloTabla = (ModeloTablaActividades) tbActividades.getModel();
-
-			JTable selected = (JTable) e.getSource();
-
-			int row = selected.getSelectedRow();
-			int col = selected.getSelectedColumn();
-
-			if (col == 3 || col == 4) {
-
-				Object oMin = tbActividades.getModel().getValueAt(row, 3);
-				int valorMin = Integer.parseInt(String.valueOf(oMin));
-
-				Object oMax = tbActividades.getModel().getValueAt(row, 4);
-				int valorMax = Integer.parseInt(String.valueOf(oMax));
-
-				if (valorMin > valorMax)
-					tbActividades.getModel().setValueAt(tbActividades.getValueAt(row, 4), row, 3);
-
-				modeloTabla.fireTableDataChanged();
-
-			}
-
-		}
-	}*/
 
 }

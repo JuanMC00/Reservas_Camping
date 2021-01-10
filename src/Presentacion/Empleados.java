@@ -39,12 +39,12 @@ public class Empleados extends JPanel {
 		pnlBotones = new JPanel();
 		add(pnlBotones, BorderLayout.SOUTH);
 		
-		btnAlta = new JButton("Dar de alta");
+		btnAlta = new JButton(Internacionalizacion.getString("Empleados.btnAlta.text")); //$NON-NLS-1$
 		btnAlta.addActionListener(new BtnAltaActionListener());
 
 		pnlBotones.add(btnAlta);
 		
-		btnBaja = new JButton("Dar de baja");
+		btnBaja = new JButton(Internacionalizacion.getString("Empleados.btnBaja.text")); //$NON-NLS-1$
 		btnBaja.addActionListener(new BtnBajaActionListener());
 		pnlBotones.add(btnBaja);
 		
@@ -62,9 +62,17 @@ public class Empleados extends JPanel {
 		
 		TableColumn columnaDisponibilidad = tbEmpleados.getColumnModel().getColumn(7);
 		JComboBox cboDisponibilidad = new JComboBox();
-		cboDisponibilidad.addItem("Mañana");
-		cboDisponibilidad.addItem("Tarde");
-		cboDisponibilidad.addItem("Noche");
+		
+		if(Internacionalizacion.getIdioma().equals("espanol")) {
+			cboDisponibilidad.addItem("Mañana");
+			cboDisponibilidad.addItem("Tarde");
+			cboDisponibilidad.addItem("Noche");
+		}
+		else {
+			cboDisponibilidad.addItem("Morning");
+			cboDisponibilidad.addItem("Afternoon");
+			cboDisponibilidad.addItem("Night");			
+		}
 		columnaDisponibilidad.setCellEditor(new DefaultCellEditor(cboDisponibilidad));
 		
 		

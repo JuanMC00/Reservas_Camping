@@ -5,9 +5,18 @@ import javax.swing.table.*;
 
 public class ModeloTablaEmpleados extends AbstractTableModel {
 
-	private String[] nombreColumnas = {"Nombre", "Apellidos", "Foto", "Telefono", "Correo electronico", "Idioma(s)", "Formacion", "Disponibilidad"};
+	private String[] nombreColumnas = setnombreColumnas();
 
 	private Vector datos = new Vector();
+	
+	private String[] setnombreColumnas() {
+		String[] columnas = {"Nombre", "Apellidos", "Foto", "Telefono", "Correo electronico", "Idioma(s)", "Formacion", "Disponibilidad"};
+		
+		if(Internacionalizacion.getIdioma().equals("ingles"))
+			columnas = new String[] {"Name", "Surnames", "Picture", "Phone", "Email", "Languages", "modality", "Disponibility"};
+		
+		return columnas;
+	}
 	
 	public String[] getNombreColumnas() {
 		return nombreColumnas;
