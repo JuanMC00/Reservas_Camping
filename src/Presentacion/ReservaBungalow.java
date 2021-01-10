@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.Rectangle;
 import java.awt.event.ActionListener;
+import java.util.NoSuchElementException;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Component;
@@ -67,18 +68,20 @@ public class ReservaBungalow extends JPanel {
 	private JTextField txtEquipamientoExtra;
 	private JButton btnGaleria;
 	private JButton btnLimpiar;
-	private JButton btnGuardar;
+	private JButton btnReservar;
 	private JLabel lblErrorCamposObligatorios;
 	private JButton btnBuscar;
 	private JButton btnAceptar;
 	
 	ReservaGuardada VentanaOK;
+	private JLabel lblErrorFecha1;
+	private JLabel lblErrorFecha2;
 	
 	public ReservaBungalow() {
 		setBounds(new Rectangle(0, 0, 1450, 980));
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{75, 250, 85, 85, 40, 100, 165, 140, 140, 510, 45, 0};
-		gridBagLayout.rowHeights = new int[]{75, 15, 35, 35, 35, 35, 35, 35, 35, 35, 95, 65, 35, 15, 36, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 0};
+		gridBagLayout.columnWidths = new int[]{75, 250, 85, 85, 40, 100, 165, 165, 165, 510, 45, 0};
+		gridBagLayout.rowHeights = new int[]{75, 15, 35, 35, 35, 35, 35, 35, 35, 35, 95, 65, 35, 15, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -316,7 +319,7 @@ public class ReservaBungalow extends JPanel {
 		cboTamano.addActionListener(new cboTamanoActionListener());
 		cboTamano.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		if(Internacionalizacion.getIdioma().equals("espanol"))
-			cboTamano.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)", "Pequeños", "Medianos", "Grandes", "Deluxe"}));
+			cboTamano.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)", "Pequeño", "Mediano", "Grande", "Deluxe"}));
 		else
 			cboTamano.setModel(new DefaultComboBoxModel(new String[] {"(No selection)", "Small", "Medium", "Big", "Deluxe"}));
 		
@@ -350,7 +353,7 @@ public class ReservaBungalow extends JPanel {
 		
 		cboCapacidadMax = new JComboBox();
 		cboCapacidadMax.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cboCapacidadMax.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
+		cboCapacidadMax.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10"}));
 		GridBagConstraints gbc_cboCapacidadMax = new GridBagConstraints();
 		gbc_cboCapacidadMax.gridwidth = 3;
 		gbc_cboCapacidadMax.insets = new Insets(0, 0, 5, 5);
@@ -379,6 +382,18 @@ public class ReservaBungalow extends JPanel {
 		add(txtFechaLlegada, gbc_txtFechaLlegada);
 		txtFechaLlegada.setColumns(10);
 		
+		lblErrorFecha1 = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblErrorFecha1.text")); //$NON-NLS-1$
+		lblErrorFecha1.setVisible(false);
+		lblErrorFecha1.setForeground(Color.RED);
+		lblErrorFecha1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblErrorFecha1 = new GridBagConstraints();
+		gbc_lblErrorFecha1.anchor = GridBagConstraints.WEST;
+		gbc_lblErrorFecha1.gridwidth = 4;
+		gbc_lblErrorFecha1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorFecha1.gridx = 4;
+		gbc_lblErrorFecha1.gridy = 16;
+		add(lblErrorFecha1, gbc_lblErrorFecha1);
+		
 		lblFechaSalida = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblFechaSalida.text")); //$NON-NLS-1$
 		lblFechaSalida.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblFechaSalida = new GridBagConstraints();
@@ -398,6 +413,18 @@ public class ReservaBungalow extends JPanel {
 		gbc_txtFechaSalida.gridy = 17;
 		add(txtFechaSalida, gbc_txtFechaSalida);
 		txtFechaSalida.setColumns(10);
+		
+		lblErrorFecha2 = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblErrorFecha2.text")); //$NON-NLS-1$
+		lblErrorFecha2.setVisible(false);
+		lblErrorFecha2.setForeground(Color.RED);
+		lblErrorFecha2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblErrorFecha2 = new GridBagConstraints();
+		gbc_lblErrorFecha2.anchor = GridBagConstraints.WEST;
+		gbc_lblErrorFecha2.gridwidth = 4;
+		gbc_lblErrorFecha2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorFecha2.gridx = 4;
+		gbc_lblErrorFecha2.gridy = 17;
+		add(lblErrorFecha2, gbc_lblErrorFecha2);
 		
 		lblPrecioNoche = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblPrecioNoche.text")); //$NON-NLS-1$
 		lblPrecioNoche.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -492,10 +519,10 @@ public class ReservaBungalow extends JPanel {
 		gbc_lblDescripcion.gridy = 22;
 		add(lblDescripcion, gbc_lblDescripcion);
 		
-		btnGuardar = new JButton(Internacionalizacion.getString("ReservaBungalow.btnGuardar.text")); //$NON-NLS-1$
-		btnGuardar.setEnabled(false);
-		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnGuardar.addActionListener(new BtnGuardarActionListener());
+		btnReservar = new JButton(Internacionalizacion.getString("ReservaBungalow.btnGuardar.text")); //$NON-NLS-1$
+		btnReservar.setEnabled(false);
+		btnReservar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnReservar.addActionListener(new BtnGuardarActionListener());
 		
 		btnLimpiar = new JButton(Internacionalizacion.getString("ReservaBungalow.btnLimpiar.text")); //$NON-NLS-1$
 		btnLimpiar.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -526,17 +553,17 @@ public class ReservaBungalow extends JPanel {
 		gbc_btnAceptar.gridx = 7;
 		gbc_btnAceptar.gridy = 24;
 		add(btnAceptar, gbc_btnAceptar);
-		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
-		gbc_btnGuardar.fill = GridBagConstraints.BOTH;
-		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnGuardar.gridx = 8;
-		gbc_btnGuardar.gridy = 24;
-		add(btnGuardar, gbc_btnGuardar);
+		GridBagConstraints gbc_btnReservar = new GridBagConstraints();
+		gbc_btnReservar.fill = GridBagConstraints.BOTH;
+		gbc_btnReservar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnReservar.gridx = 8;
+		gbc_btnReservar.gridy = 24;
+		add(btnReservar, gbc_btnReservar);
 		
 		lblErrorCamposObligatorios = new JLabel(Internacionalizacion.getString("ReservaBungalow.lblErrorCamposObligatorios.text")); //$NON-NLS-1$
 		lblErrorCamposObligatorios.setVisible(false);
 		lblErrorCamposObligatorios.setForeground(Color.RED);
-		lblErrorCamposObligatorios.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblErrorCamposObligatorios.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblErrorCamposObligatorios = new GridBagConstraints();
 		gbc_lblErrorCamposObligatorios.anchor = GridBagConstraints.WEST;
 		gbc_lblErrorCamposObligatorios.insets = new Insets(0, 0, 5, 5);
@@ -546,14 +573,22 @@ public class ReservaBungalow extends JPanel {
 
 	}
 	
-	private boolean checkCampos(){
+	/*
+	 * private boolean checkCampos(){ boolean flag=false; if(txtNombre.getText() ==
+	 * "" || txtApellidos.getText() == "" || txtTelefono.getText() == "" ||
+	 * txtHoraLlegada.getText() == "" || txtHoraSalida.getText() == "" ||
+	 * txtFechaLlegada.getText() == "" || txtFechaSalida.getText() == "") flag=true;
+	 * 
+	 * return flag; }
+	 */
+	
+	private boolean checkCampos() {
 		boolean flag=false;
 		if(txtNombre.getText() == ""					||
 				txtApellidos.getText() == ""			||
 				txtTelefono.getText() == ""				||
 				txtHoraLlegada.getText() == "" 			||
 				txtHoraSalida.getText() == ""			||
-				cboCapacidadMax.getSelectedIndex() == 0	||
 				txtFechaLlegada.getText() == ""			||
 				txtFechaSalida.getText() == "")
 			flag=true;
@@ -583,15 +618,17 @@ public class ReservaBungalow extends JPanel {
 		txtEquipamientoExtra.setText("");
 		txtEquipamientoExtra.setEnabled(false);
 		txtEquipamientoExtra.setVisible(false);
+		lblErrorFecha1.setVisible(false);
+		lblErrorFecha2.setVisible(false);
 		lblErrorCamposObligatorios.setVisible(false);
-		btnGuardar.setEnabled(false);
+		btnReservar.setEnabled(false);
 		
 	}	
 
 	private class BtnLimpiarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			limpiarCampos();
-			btnGuardar.setEnabled(false);
+			btnReservar.setEnabled(false);
 		}
 
 	}
@@ -644,7 +681,7 @@ public class ReservaBungalow extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			limpiarCampos();
 			VentanaOK.getFrame().setVisible(true);
-			btnGuardar.setEnabled(false);
+			btnReservar.setEnabled(false);
 		}			
 	}
 	
@@ -663,12 +700,39 @@ public class ReservaBungalow extends JPanel {
 				
 			else {
 				double precio=0.0;
-				ClaseDominio calcular= new ClaseDominio();
-				lblErrorCamposObligatorios.setVisible(false);
-				btnGuardar.setEnabled(true);
-				precio=calcular.calcularPrecioNocheBungalow(txtFechaLlegada.getText(), cboTamano.getSelectedIndex()); //El precio se calcula con la temporada del dia de llegada
-				lblPrecioNocheConsultado.setText(String.valueOf(precio)+ " €");
-				lblPrecioTotalConsultado.setText(String.valueOf(precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText()) + " €"));
+				ClaseDominio calcular = new ClaseDominio();
+				
+				try {		
+					
+					lblErrorCamposObligatorios.setVisible(false);
+					btnReservar.setEnabled(true);
+					precio=calcular.calcularPrecioNocheBungalow(txtFechaLlegada.getText(), cboTamano.getSelectedIndex()); //El precio se calcula con la temporada del dia de llegada
+					lblPrecioNocheConsultado.setText(String.valueOf(precio)+ " €");
+					lblErrorFecha1.setVisible(false);
+					
+				}catch(NoSuchElementException NSEE1) {
+					lblErrorFecha1.setVisible(true);					
+				}
+				
+				catch(NumberFormatException NFE1) {
+					lblErrorFecha1.setVisible(true);				
+				}
+				
+				try {
+					double precioTotal=precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText());
+					if(precioTotal==0.0)
+						lblPrecioTotalConsultado.setText(precio + " €");
+					else
+						lblPrecioTotalConsultado.setText(String.valueOf(precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText()) + " €"));
+					lblErrorFecha2.setVisible(false);
+					
+				}catch(NoSuchElementException NSEE2) {
+					lblErrorFecha2.setVisible(true);					
+				}
+				
+				catch(NumberFormatException NFE1) {
+					lblErrorFecha2.setVisible(true);				
+				}
 			}
 		}
 	}

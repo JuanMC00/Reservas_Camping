@@ -16,10 +16,12 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.io.*;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.awt.Color;
 
 import Dominio.ClaseDominio;
+import javax.swing.SwingConstants;
 
 public class ReservaParcela extends JPanel {
 	private JLabel lblNombre;
@@ -59,18 +61,20 @@ public class ReservaParcela extends JPanel {
 	private JLabel lblPrecioTotal;
 	private JLabel lblPrecioTotalConsultado;
 	private JButton btnLimpiar;
-	private JButton btnGuardar;
+	private JButton btnReservar;
 	private JLabel lblParticularidadesConsultadas;
 	private JLabel lblCercaniasConsultadas;
 	private JLabel lblErrorCamposObligatorios;
 	private JButton btnAceptar;
 	
 	ReservaGuardada VentanaOK;
+	private JLabel lblErrorFecha1;
+	private JLabel lblErrorFecha2;
 	
 	public ReservaParcela() {
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{75, 250, 85, 85, 40, 100, 165, 140, 140, 510, 45, 0};
-		gridBagLayout.rowHeights = new int[]{75, 15, 35, 35, 35, 35, 35, 35, 35, 35, 95, 65, 35, 15, 36, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 0};
+		gridBagLayout.columnWidths = new int[]{75, 250, 85, 85, 40, 100, 165, 165, 165, 510, 45, 0};
+		gridBagLayout.rowHeights = new int[]{75, 15, 35, 35, 35, 35, 35, 35, 35, 35, 95, 65, 35, 15, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35, 35};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		setLayout(gridBagLayout);
@@ -286,7 +290,7 @@ public class ReservaParcela extends JPanel {
 		add(lblEsquemaCampingTexto, gbc_lblEsquemaCampingTexto);
 		
 		lblEsquemaCamping = new JLabel(""); //$NON-NLS-1$
-		lblEsquemaCamping.setIcon(new ImageIcon(ReservaParcela.class.getResource("/Presentacion/Fotos/Esquema_Camping2.png")));
+		lblEsquemaCamping.setIcon(new ImageIcon(ReservaParcela.class.getResource("/Presentacion/Fotos/Mapa_Camping.png")));
 		GridBagConstraints gbc_lblEsquemaCamping = new GridBagConstraints();
 		gbc_lblEsquemaCamping.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEsquemaCamping.gridheight = 11;
@@ -307,9 +311,9 @@ public class ReservaParcela extends JPanel {
 		cboTipo.addActionListener(new cboTipoActionListener());
 		cboTipo.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		if(Internacionalizacion.getIdioma().equals("espanol"))
-			cboTipo.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)", "Pequeñas", "Medianas", "Deluxe", "For Camper"}));
+			cboTipo.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)", "Pequeñas", "Medianas", "Deluxe", "Para Autocaravanas"}));
 		else
-			cboTipo.setModel(new DefaultComboBoxModel(new String[] {"(No selection)", "Small", "Medium", "Deluxe", ""}));
+			cboTipo.setModel(new DefaultComboBoxModel(new String[] {"(No selection)", "Small", "Medium", "Deluxe", "For Camper"}));
 		
 		GridBagConstraints gbc_cboTipo = new GridBagConstraints();
 		gbc_cboTipo.gridwidth = 3;
@@ -331,7 +335,6 @@ public class ReservaParcela extends JPanel {
 		cboUbicacion = new JComboBox();
 		cboUbicacion.setEnabled(false);
 		cboUbicacion.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		cboUbicacion.setModel(new DefaultComboBoxModel(new String[] {"(Sin selección)"}));
 		GridBagConstraints gbc_cboUbicacion = new GridBagConstraints();
 		gbc_cboUbicacion.gridwidth = 3;
 		gbc_cboUbicacion.insets = new Insets(0, 0, 5, 5);
@@ -360,6 +363,18 @@ public class ReservaParcela extends JPanel {
 		add(txtFechaLlegada, gbc_txtFechaLlegada);
 		txtFechaLlegada.setColumns(10);
 		
+		lblErrorFecha1 = new JLabel(Internacionalizacion.getString("ReservaParcela.lblErrorFecha1.text"));
+		lblErrorFecha1.setVisible(false);
+		lblErrorFecha1.setForeground(Color.RED);
+		lblErrorFecha1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblErrorFecha1 = new GridBagConstraints();
+		gbc_lblErrorFecha1.anchor = GridBagConstraints.WEST;
+		gbc_lblErrorFecha1.gridwidth = 4;
+		gbc_lblErrorFecha1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorFecha1.gridx = 4;
+		gbc_lblErrorFecha1.gridy = 16;
+		add(lblErrorFecha1, gbc_lblErrorFecha1);
+		
 		lblFechaSalida = new JLabel(Internacionalizacion.getString("ReservaParcela.lblFechaSalida.text")); //$NON-NLS-1$
 		lblFechaSalida.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblFechaSalida = new GridBagConstraints();
@@ -379,6 +394,18 @@ public class ReservaParcela extends JPanel {
 		gbc_txtFechaSalida.gridy = 17;
 		add(txtFechaSalida, gbc_txtFechaSalida);
 		txtFechaSalida.setColumns(10);
+		
+		lblErrorFecha2 = new JLabel(Internacionalizacion.getString("ReservaParcela.lblErrorFecha2.text")); //$NON-NLS-1$
+		lblErrorFecha2.setVisible(false);
+		lblErrorFecha2.setForeground(Color.RED);
+		lblErrorFecha2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		GridBagConstraints gbc_lblErrorFecha2 = new GridBagConstraints();
+		gbc_lblErrorFecha2.anchor = GridBagConstraints.WEST;
+		gbc_lblErrorFecha2.gridwidth = 4;
+		gbc_lblErrorFecha2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblErrorFecha2.gridx = 4;
+		gbc_lblErrorFecha2.gridy = 17;
+		add(lblErrorFecha2, gbc_lblErrorFecha2);
 		
 		lblPrecioNoche = new JLabel(Internacionalizacion.getString("ReservaParcela.lblPrecioNoche.text")); //$NON-NLS-1$
 		lblPrecioNoche.setFont(new Font("Tahoma", Font.PLAIN, 18));
@@ -424,6 +451,7 @@ public class ReservaParcela extends JPanel {
 		add(lblCercanias, gbc_lblCercanias);
 		
 		lblCercaniasConsultadas = new JLabel(); //$NON-NLS-1$
+		lblCercaniasConsultadas.setHorizontalAlignment(SwingConstants.LEFT);
 		lblCercaniasConsultadas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblCercaniasConsultadas = new GridBagConstraints();
 		gbc_lblCercaniasConsultadas.anchor = GridBagConstraints.WEST;
@@ -443,8 +471,10 @@ public class ReservaParcela extends JPanel {
 		add(lblParticularidades, gbc_lblParticularidades);
 		
 		lblParticularidadesConsultadas = new JLabel(); //$NON-NLS-1$
+		lblParticularidadesConsultadas.setHorizontalAlignment(SwingConstants.LEFT);
 		lblParticularidadesConsultadas.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblParticularidadesConsultadas = new GridBagConstraints();
+		gbc_lblParticularidadesConsultadas.anchor = GridBagConstraints.WEST;
 		gbc_lblParticularidadesConsultadas.gridwidth = 4;
 		gbc_lblParticularidadesConsultadas.insets = new Insets(0, 0, 5, 5);
 		gbc_lblParticularidadesConsultadas.gridx = 2;
@@ -471,21 +501,21 @@ public class ReservaParcela extends JPanel {
 		gbc_btnAceptar.gridy = 24;
 		add(btnAceptar, gbc_btnAceptar);
 		
-		btnGuardar = new JButton(Internacionalizacion.getString("ReservaParcela.btnGuardar.text")); //$NON-NLS-1$
-		btnGuardar.setEnabled(false);
-		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 18));
-		btnGuardar.addActionListener(new BtnGuardarActionListener());
-		GridBagConstraints gbc_btnGuardar = new GridBagConstraints();
-		gbc_btnGuardar.fill = GridBagConstraints.BOTH;
-		gbc_btnGuardar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnGuardar.gridx = 8;
-		gbc_btnGuardar.gridy = 24;
-		add(btnGuardar, gbc_btnGuardar);
+		btnReservar = new JButton(Internacionalizacion.getString("ReservaParcela.btnGuardar.text")); //$NON-NLS-1$
+		btnReservar.setEnabled(false);
+		btnReservar.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnReservar.addActionListener(new BtnGuardarActionListener());
+		GridBagConstraints gbc_btnReservar = new GridBagConstraints();
+		gbc_btnReservar.fill = GridBagConstraints.BOTH;
+		gbc_btnReservar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnReservar.gridx = 8;
+		gbc_btnReservar.gridy = 24;
+		add(btnReservar, gbc_btnReservar);
 		
-		lblErrorCamposObligatorios = new JLabel(Internacionalizacion.getString("ReservaParcela.lblErrorCamposObligatorios.text")); //$NON-NLS-1$
+		lblErrorCamposObligatorios = new JLabel(Internacionalizacion.getString("ReservaParcela.lblErrorCamposObligatorios.text"));
 		lblErrorCamposObligatorios.setVisible(false);
 		lblErrorCamposObligatorios.setForeground(Color.RED);
-		lblErrorCamposObligatorios.setFont(new Font("Tahoma", Font.BOLD, 18));
+		lblErrorCamposObligatorios.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GridBagConstraints gbc_lblErrorCamposObligatorios = new GridBagConstraints();
 		gbc_lblErrorCamposObligatorios.anchor = GridBagConstraints.WEST;
 		gbc_lblErrorCamposObligatorios.insets = new Insets(0, 0, 5, 5);
@@ -526,28 +556,28 @@ public class ReservaParcela extends JPanel {
 		lblPrecioTotalConsultado.setText("");
 		lblCercaniasConsultadas.setText("");
 		lblParticularidadesConsultadas.setText("");
+		lblErrorFecha1.setVisible(false);
+		lblErrorFecha2.setVisible(false);
 		lblErrorCamposObligatorios.setVisible(false);
-		btnGuardar.setEnabled(false);
+		btnReservar.setEnabled(false);
 		
 	}
 	
 	private class BtnLimpiarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			limpiar();
-			btnGuardar.setEnabled(false);
+			btnReservar.setEnabled(false);
 		}
 	}
 	
 	private class cboTipoActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
 			if(cboTipo.getSelectedIndex() != 0) {
-				cboUbicacion.setEnabled(true);
 				cboUbicacion.removeAllItems();
 				int index = cboTipo.getSelectedIndex();
 				
 				//Con switch no funciona no se por que
-				if(index==1) {
-					lblCercaniasConsultadas.setText("");
+				if(index==1) { //Parcelas pequeñas
 					cboUbicacion.addItem("1A");
 					cboUbicacion.addItem("1B");
 					cboUbicacion.addItem("2A");
@@ -556,7 +586,7 @@ public class ReservaParcela extends JPanel {
 					cboUbicacion.addItem("3B");	
 					
 				}else {
-					if(index==2) {
+					if(index==2) { //Parcelas medianas
 						cboUbicacion.addItem("1C");
 						cboUbicacion.addItem("2C");
 						cboUbicacion.addItem("3C");
@@ -564,7 +594,7 @@ public class ReservaParcela extends JPanel {
 						cboUbicacion.addItem("5C");
 						
 					}else {
-						if(index==3) {
+						if(index==3) { //Parcelas grandes
 							cboUbicacion.addItem("1D");
 							cboUbicacion.addItem("2D");
 							cboUbicacion.addItem("3D");
@@ -572,7 +602,7 @@ public class ReservaParcela extends JPanel {
 							cboUbicacion.addItem("5D");
 							
 						}else {
-							if(index==4) {
+							if(index==4) { //Parcelas deluxe
 								cboUbicacion.addItem("4A");
 								cboUbicacion.addItem("4B");
 								cboUbicacion.addItem("5A");
@@ -582,19 +612,21 @@ public class ReservaParcela extends JPanel {
 						}
 					}
 				}
+				cboUbicacion.setEnabled(true);
 	
 			} else cboUbicacion.setEnabled(false);
 		}
 	}
 	
+
 	private class BtnGuardarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			limpiar();
 			VentanaOK.getFrame().setVisible(true);
-			btnGuardar.setEnabled(false);
+			btnReservar.setEnabled(false);
 		}
 	}
-
+	
 
 	private class BtnAceptarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -602,13 +634,55 @@ public class ReservaParcela extends JPanel {
 				lblErrorCamposObligatorios.setVisible(true);
 				
 			else {
+				
+				//En cuanto a precio por noche y precio total de la parcela:
 				double precio=0.0;
-				ClaseDominio calcular= new ClaseDominio();
-				lblErrorCamposObligatorios.setVisible(false);
-				btnGuardar.setEnabled(true);
-				precio=calcular.calcularPrecioNocheParcela(txtFechaLlegada.getText(), cboTipo.getSelectedIndex()); //El precio se calcula con la temporada del dia de llegada
-				lblPrecioNocheConsultado.setText(String.valueOf(precio)+ " €");
-				lblPrecioTotalConsultado.setText(String.valueOf(precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText()) + " €"));
+				ClaseDominio calcular = new ClaseDominio();
+				
+				try {		
+					
+					lblErrorCamposObligatorios.setVisible(false);
+					btnReservar.setEnabled(true);
+					precio=calcular.calcularPrecioNocheParcela(txtFechaLlegada.getText(), cboTipo.getSelectedIndex()); //El precio se calcula con la temporada del dia de llegada
+					lblPrecioNocheConsultado.setText(String.valueOf(precio)+ " €");
+					lblErrorFecha1.setVisible(false);
+					
+				}catch(NoSuchElementException NSEE1) {
+					lblErrorFecha1.setVisible(true);					
+				}
+				
+				catch(NumberFormatException NFE1) {
+					lblErrorFecha1.setVisible(true);				
+				}
+				
+				try {
+					double precioTotal=precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText());
+					if(precioTotal==0.0)
+						lblPrecioTotalConsultado.setText(precio + " €");
+					else
+						lblPrecioTotalConsultado.setText(String.valueOf(precio*calcular.calcularDias(txtFechaLlegada.getText(), txtFechaSalida.getText()) + " €"));
+					lblErrorFecha2.setVisible(false);
+					
+				}catch(NoSuchElementException NSEE2) {
+					lblErrorFecha2.setVisible(true);					
+				}
+				
+				catch(NumberFormatException NFE1) {
+					lblErrorFecha2.setVisible(true);				
+				}
+				
+				
+				//En cuanto a cercanias particularidades de la parcela
+				ClaseDominio obtenerInfo = new ClaseDominio();
+				
+				try {
+					lblCercaniasConsultadas.setText(obtenerInfo.infoCercaniasParcela(String.valueOf(cboUbicacion.getSelectedItem())));
+					lblParticularidadesConsultadas.setText(obtenerInfo.infoParticularidadesParcela(String.valueOf(cboUbicacion.getSelectedItem())));
+				
+				} catch (FileNotFoundException FNFE) {
+					System.out.println("Fichero Parcelas.txt no encontrado");
+				}
+				
 			}
 			
 		}

@@ -1,21 +1,20 @@
-1A;Pequeña;0;WC;Nada;
-1B;Pequeña;0;WC;Nada;
-1C;Mediana;0;Entrada;Luz;
-1D;Deluxe;0;Entrada;Luz y Gas;
-2A;Pequeña;0;WC;Nada;
-2B;Pequeña;0;WC;Nada;
-2C;Mediana;0;Entrada;Luz
-2D;Deluxe;0;Entrada;Luz y Gas;
-3A;Pequeña;0;Restaurante;Nada;
-3B;Pequeña;0;Restaurante;Nada;
-3C;Mediana;0;Playa;Luz;
-3D;Deluxe;0;Playa;Luz y Gas;
-4A;Autocaravana;0;Restaurante;Luz y Agua;
-4B;Autocaravana;0;Restaurante;Luz y Agua;
-4C;Mediana;0;PLaya;Luz;
-4D;Deluxe;0;Playa;Luz y Gas;
-5A;Autocaravana;0;Piscina;Luz y Agua;
-5B;Autocaravana;0;Piscina;Luz y Agua;
-5C;Mediana;0;Piscina y playa;Luz;
-5D;Deluxe;0;Piscina y playa;Luz y Gas;
-
+1A;Pequeña;WC;Cesped
+1B;Pequeña;WC;Cesped
+1C;Mediana;Entrada;Luz
+1D;Deluxe;Entrada;Luz y Gas
+2A;Pequeña;WC;Cesped
+2B;Pequeña;WC;Cesped
+2C;Mediana;Entrada;Luz
+2D;Deluxe;Entrada;Luz y Gas
+3A;Pequeña;WC y Restaurante;Nada
+3B;Pequeña;Restaurante;Nada
+3C;Mediana;Playa;Luz
+3D;Deluxe;Playa;Luz y Gas
+4A;Autocaravana;Restaurante;Luz y Agua
+4B;Autocaravana;Restaurante;Luz y Agua
+4C;Mediana;PLaya;Luz
+4D;Deluxe;Playa;Luz y Gas
+5A;Autocaravana;Piscina y Restaurante;Luz y Agua
+5B;Autocaravana;Piscina;Luz y Agua
+5C;Mediana;Piscina y playa;Luz
+5D;Deluxe;Piscina y playa;Luz y Gas

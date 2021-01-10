@@ -1,8 +1,12 @@
 package Dominio;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+import java.util.NoSuchElementException;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class ClaseDominio implements Datos{
@@ -73,7 +77,7 @@ public class ClaseDominio implements Datos{
 		return Integer.valueOf(st2.nextToken()) - Integer.valueOf(st1.nextToken());
 	}
 	
-	public double calcularIncrementoDecremento(String fechaLlegada, double precio) {
+	public double calcularIncrementoDecremento(String fechaLlegada, double precio) throws NoSuchElementException{
 		double resultado=0.0;
 		StringTokenizer st = new StringTokenizer(fechaLlegada, "/");
 		st.nextToken();//dia		
@@ -99,5 +103,35 @@ public class ClaseDominio implements Datos{
 		}
 		return datos;
 	}
+
+	public String infoCercaniasParcela(String parcela) throws FileNotFoundException {
+		return infoParcela(parcela)[0];
+	}
+
+	public String infoParticularidadesParcela(String parcela) throws FileNotFoundException {
+		return infoParcela(parcela)[1];
+	}
 	
+	public String[] infoParcela(String parcela) throws FileNotFoundException {
+		String[] info = new String[2];
+		File parcelas = new File("Parcelas.txt");
+		Scanner sc = new Scanner(parcelas);
+
+		boolean token=true;
+		while(sc.hasNextLine() && token) {
+			String linea=sc.nextLine();
+			StringTokenizer st = new StringTokenizer(linea, ";\n");
+
+			while(st.hasMoreTokens()) {
+				if(st.nextToken().equals(parcela)) {
+					st.nextToken();//Saltamos el tipo
+					info[0]=st.nextToken();
+					info[1]=st.nextToken();
+					token=false;
+				}
+			}
+		}
+
+		return info;
+	}
 }

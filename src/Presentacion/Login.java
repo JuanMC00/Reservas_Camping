@@ -94,7 +94,7 @@ public class Login {
 		JButton btnEnglish = new JButton("");
 		btnEnglish.addActionListener(new BtnEnglishActionListener());
 		btnEnglish.setIcon(new ImageIcon(Login.class.getResource("/Presentacion/Fotos/Reino_Unido.png")));
-		btnEnglish.setBounds(441, 13, 50, 50);
+		btnEnglish.setBounds(431, 13, 50, 50);
 		login.getContentPane().add(btnEnglish);
 		
 		lblError = new JLabel(Internacionalizacion.getString("Login.lblError.text")); //$NON-NLS-1$
@@ -106,7 +106,7 @@ public class Login {
 		
 		btnEntrar = new JButton(Internacionalizacion.getString("Login.btnEntrar.text")); //$NON-NLS-1$
 		btnEntrar.addActionListener(new BtnEntrarActionListener());
-		btnEntrar.setBounds(367, 159, 97, 25);
+		btnEntrar.setBounds(367, 159, 114, 25);
 		login.getContentPane().add(btnEntrar);
 		
 		txtrBienvenida = new JTextArea();
@@ -128,62 +128,81 @@ public class Login {
 		login.getContentPane().add(txtContrasena);
 
 	}
+	
 
 	private class BtnEntrarActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			String password="", user="";
-			boolean token=false;
-			
-			try {
-				File users = new File("Usuarios.txt");
-				Scanner sc = new Scanner(users);
-				
-				while(sc.hasNext() && !token) {
-					String linea=sc.nextLine();
-					StringTokenizer st = new StringTokenizer(linea, ";");
-					user=st.nextToken();
-					password=st.nextToken();
-					
-					if(user.equals(txtUsuario.getText()) && password.equals(txtContrasena.getText())) {
-						FileWriter fw = new FileWriter("DatosUsuario.txt");
-						fw.write(st.nextToken() + "\n" + st.nextToken() + "\n" + st.nextToken() + "\n" + st.nextToken() + "\n");
-						fw.close();
-						
-						VentanaPrincipal home = new VentanaPrincipal();
-						home.getFrame().setVisible(true);
-						login.setVisible(false);
-						token=true;
-					}
-				}
-				
-				if (!token) {
-					txtUsuario.setText("");
-					txtContrasena.setText("");
-					lblError.setVisible(true);
-				}
-					
-			}catch (IOException FNFE) {
-				System.out.println("Fichero de usuarios autenticados no encontrado.");
-			}			
-		
+			entrar();
 		}
 	}
+	
 	
 	private class BtnEnglishActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent arg0) {
-			Internacionalizacion.setIdioma("ingles");
-			Login login2 = new Login();
-			login.setVisible(false);
-			login2.login.setVisible(true);
+			if(!txtUsuario.getText().equals("") && !txtContrasena.getText().equals("")) {
+				Internacionalizacion.setIdioma("ingles");
+				entrar();
+			}
+			else {
+				Internacionalizacion.setIdioma("ingles");
+				Login login2 = new Login();
+				login.setVisible(false);
+				login2.login.setVisible(true);
+			}
 		}
 	}
 	
+	
 	private class BtnEspanolActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			Internacionalizacion.setIdioma("espanol");
-			Login login2 = new Login();
-			login.setVisible(false);
-			login2.login.setVisible(true);
+			if(!txtUsuario.getText().equals("") && !txtContrasena.getText().equals("")) {
+				Internacionalizacion.setIdioma("espanol");
+				entrar();
+			}
+			else{
+				Internacionalizacion.setIdioma("espanol");
+				Login login2 = new Login();
+				login.setVisible(false);
+				login2.login.setVisible(true);
+			}
+		}
+	}
+	
+	
+	private void entrar() {
+		String password="", user="";
+		boolean token=false;
+		
+		try {
+			File users = new File("Usuarios.txt");
+			Scanner sc = new Scanner(users);
+			
+			while(sc.hasNext() && !token) {
+				String linea=sc.nextLine();
+				StringTokenizer st = new StringTokenizer(linea, ";");
+				user=st.nextToken();
+				password=st.nextToken();
+				
+				if(user.equals(txtUsuario.getText()) && password.equals(txtContrasena.getText())) {
+					FileWriter fw = new FileWriter("DatosUsuario.txt");
+					fw.write(st.nextToken() + "\n" + st.nextToken() + "\n" + st.nextToken() + "\n" + st.nextToken() + "\n");
+					fw.close();
+					
+					VentanaPrincipal home = new VentanaPrincipal();
+					home.getFrame().setVisible(true);
+					login.setVisible(false);
+					token=true;
+				}
+			}
+			
+			if (!token) {
+				txtUsuario.setText("");
+				txtContrasena.setText("");
+				lblError.setVisible(true);
+			}
+				
+		}catch (IOException FNFE) {
+			System.out.println("Fichero de usuarios autenticados no encontrado.");
 		}
 	}
 	

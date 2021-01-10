@@ -90,6 +90,9 @@ public class VentanaPrincipal {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		lblBarraEstado = new JLabel(); //$NON-NLS-1$
+		lblBarraEstado.setText("Usted se encuentra en el inicio");
+		if(Internacionalizacion.getIdioma().equals("ingles"))					
+			lblBarraEstado.setText("You are in the home");
 		frame.getContentPane().add(lblBarraEstado, BorderLayout.SOUTH);
 		
 		splitPane = new JSplitPane();
