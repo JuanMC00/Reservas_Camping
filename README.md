@@ -1,4 +1,4 @@
-# IPO_1
+# Aplicación multilenguaje de Reservas de un Camping
 Repositorio creado para el trabajo de prácticas de la asignatura Interacción Persona-Ordenador I </br>
 Facultad: Escuela Superior de Informática (Ciudad Real) </br>
 Universidad: Universidad de Castilla-La Mancha </br>
