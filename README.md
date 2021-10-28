@@ -7,8 +7,9 @@ Universidad: Universidad de Castilla-La Mancha </br>
 Incluye todo el código para la correcta ejecución de la aplicación. </br>
 Enlace al enunciado de la práctica: https://drive.google.com/file/d/1qDayu1yirRv7atg4M9TGWxezvCf48wZI/view?usp=sharing </br>
 
-## Lenguajes:
-![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+## Tecnologías:
+![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white) </br>
+![Eclipse](https://img.shields.io/badge/Eclipse-FE7A16.svg?style=for-the-badge&logo=Eclipse&logoColor=white)
 
 ## Autores:
 Juan Muñoz Calvo: [@JuanMC00](https://github.com/JuanMC00) </br>
