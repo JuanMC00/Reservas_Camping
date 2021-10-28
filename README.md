@@ -9,3 +9,7 @@ Enlace al enunciado de la práctica: https://drive.google.com/file/d/1qDayu1yirR
 
 ## Lenguajes:
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
+
+## Autores:
+Juan Muñoz Calvo </br>
+Carlos Mohedano Callejo
