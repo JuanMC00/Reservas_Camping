@@ -3,9 +3,10 @@ Repositorio creado para el trabajo de prácticas de la asignatura Interacción P
 Facultad: Escuela Superior de Informática (Ciudad Real) </br>
 Universidad: Universidad de Castilla-La Mancha </br>
 
-## Descripción:
+## Descripción y contenido:
 Incluye todo el código para la correcta ejecución de la aplicación. </br>
 Enlace al enunciado de la práctica: https://drive.google.com/file/d/1qDayu1yirRv7atg4M9TGWxezvCf48wZI/view?usp=sharing </br>
+Enlace a la memoria de la práctica: https://drive.google.com/file/d/1P4zL2Xri6CtIz3YyVDgI8ma1aL2h5MjD/view?usp=sharing
 
 ## Tecnologías:
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white) </br>
