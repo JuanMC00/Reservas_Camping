@@ -11,5 +11,5 @@ Enlace al enunciado de la práctica: https://drive.google.com/file/d/1qDayu1yirR
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
 
 ## Autores:
-Juan Muñoz Calvo </br>
-Carlos Mohedano Callejo
+Juan Muñoz Calvo: @JuanMC00 </br>
+Carlos Mohedano Callejo: CarlosMC104
