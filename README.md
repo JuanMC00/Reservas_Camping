@@ -12,4 +12,4 @@ Enlace al enunciado de la práctica: https://drive.google.com/file/d/1qDayu1yirR
 
 ## Autores:
 Juan Muñoz Calvo: [@JuanMC00](https://github.com/JuanMC00) </br>
-Carlos Mohedano Callejo: [@CarlosMC104] (https://github.com/CarlosMC104)
+Carlos Mohedano Callejo: [@CarlosMC104](https://github.com/CarlosMC104)
